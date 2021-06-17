@@ -1,0 +1,31 @@
+.footer {
+	margin: 100px 0 40px;
+	text-align: center;
+}
+
+.footer p {
+	margin: 5px 0;
+}
+
+.contact {
+	width: 180px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.wa {
+	color: black;
+}
+
+.wa:hover {
+	color: rgba(0, 230, 126, 0.5);
+}
+
+.ig {
+	color: black;
+}
+
+.ig:hover {
+	color: rgba(139, 57, 177, 0.5);
+}
