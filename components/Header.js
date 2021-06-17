@@ -12,10 +12,14 @@ export default function Header() {
 			<Navbar.Collapse id='responsive-header'>
 				<Nav className='mr-auto'>
 					<Link href='/reading'>
-						<Nav.Link>Reading</Nav.Link>
+						<span className='nav-link' role='button'>
+							Reading
+						</span>
 					</Link>
-					<Link href='/writing'>
-						<Nav.Link>Writing</Nav.Link>
+					<Link href='/writing' className='nav-link'>
+						<span className='nav-link' role='button'>
+							Writing
+						</span>
 					</Link>
 				</Nav>
 				<Nav>
