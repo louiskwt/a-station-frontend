@@ -6,7 +6,7 @@ export default function Header() {
 	return (
 		<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
 			<Link href='/'>
-				<Navbar.Brand>A-Station</Navbar.Brand>
+				<a className='navbar-brand'>A-Station</a>
 			</Link>
 			<Navbar.Toggle aria-controls='responsive-header' />
 			<Navbar.Collapse id='responsive-header'>
