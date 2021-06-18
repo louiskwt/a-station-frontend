@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '@/components/Filter';
+import ExerciseCard from '@/components/ExerciseCard';
 
 export default function writing() {
 	return (
@@ -18,7 +19,7 @@ export default function writing() {
 				</Row>
 				<hr></hr>
 				<Row>
-					<h3>Questions Card go here</h3>
+					<ExerciseCard />
 				</Row>
 			</Container>
 		</Layout>
