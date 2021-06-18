@@ -9,15 +9,11 @@ export default function ExerciseCard() {
 				<Card.Header as='h5' className='bg-light'>
 					Ex 1
 				</Card.Header>
-				<Card.Body>
-					<Card.Title className={styles.tag}>
-						Special title treatment{' '}
-						<span className='ml-3 badge-pill badge-dark'>
-							T / F / NG
-						</span>
-					</Card.Title>
+				<Card.Body className={styles.tag}>
+					<Card.Title>Special title treatment </Card.Title>
+					<span className=' badge-pill badge-dark'>T / F / NG</span>
 
-					<Card.Text>
+					<Card.Text className='mt-3'>
 						With supporting text below as a natural lead-in to
 						additional content.
 					</Card.Text>
@@ -29,15 +25,11 @@ export default function ExerciseCard() {
 				<Card.Header as='h5' className='bg-info'>
 					Ex 2
 				</Card.Header>
-				<Card.Body>
-					<Card.Title className={styles.tag}>
-						Special title treatment{' '}
-						<span className='ml-3 badge-pill badge-dark'>
-							Summary Cloze
-						</span>
-					</Card.Title>
+				<Card.Body className={styles.tag}>
+					<Card.Title>Special title treatment</Card.Title>
+					<span className='badge-pill badge-dark'>Summary Cloze</span>
 
-					<Card.Text>
+					<Card.Text className='mt-3'>
 						With supporting text below as a natural lead-in to
 						additional content.
 					</Card.Text>
