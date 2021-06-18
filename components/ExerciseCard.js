@@ -1,5 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import styles from '@/styles/ExerciseCard.module.css';
 
 export default function ExerciseCard() {
 	return (
@@ -9,7 +10,7 @@ export default function ExerciseCard() {
 					Ex 1
 				</Card.Header>
 				<Card.Body>
-					<Card.Title>
+					<Card.Title className={styles.tag}>
 						Special title treatment{' '}
 						<span className='ml-3 badge-pill badge-dark'>
 							T / F / NG
@@ -29,7 +30,7 @@ export default function ExerciseCard() {
 					Ex 2
 				</Card.Header>
 				<Card.Body>
-					<Card.Title>
+					<Card.Title className={styles.tag}>
 						Special title treatment{' '}
 						<span className='ml-3 badge-pill badge-dark'>
 							Summary Cloze
