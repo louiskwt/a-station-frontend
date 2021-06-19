@@ -2,8 +2,20 @@ import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { API_URL } from '@/config/index';
 
-export default function HomePage() {
+// Fetching data
+export async function getServerSideProps() {
+	const res = await fetch(`${API_URL}/readings?_sort=date:ASC`);
+	const reading = await res.json();
+	console.log(reading);
+	return {
+		props: { reading }
+	};
+}
+
+export default function HomePage({ reading }) {
+	console.log(reading);
 	return (
 		<Layout>
 			<h2>最新練習</h2>
