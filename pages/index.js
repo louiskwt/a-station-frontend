@@ -3,23 +3,49 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { API_URL } from '@/config/index';
+import ExerciseCard from '@/components/ExerciseCard';
 
 // Fetching data
 export async function getServerSideProps() {
-	const res = await fetch(`${API_URL}/readings?_sort=date:ASC`);
-	const reading = await res.json();
-	console.log(reading);
+	const [readingsRes, writingsRes] = await Promise.all([
+		fetch(`${API_URL}/readings?_sort=date:ASC`),
+		fetch(`${API_URL}/writings?_sort=date:ASC`)
+	]);
+	const [readings, writings] = await Promise.all([
+		readingsRes.json(),
+		writingsRes.json()
+	]);
+
+	// const res = await fetch(`${API_URL}/readings?_sort=date:ASC`);
+	// const readings = await res.json();
+	// console.log(readings);
+
 	return {
-		props: { reading }
+		props: { readings, writings }
 	};
 }
 
-export default function HomePage({ reading }) {
-	console.log(reading);
+export default function HomePage({ readings, writings }) {
+	console.log(readings);
+	console.log(writings);
 	return (
 		<Layout>
-			<h2>最新練習</h2>
-			<p>Will be replaced by a component</p>
+			<h2>最新Reading練習</h2>
+			{readings.length === 0 && (
+				<h3>Oh! No reading exercise for today. You can take a break</h3>
+			)}
+			{readings.map((exercise) => (
+				<ExerciseCard exercise={exercise} key={exercise.id} />
+			))}
+			<hr />
+			<h2>最新Writing練習</h2>
+			{writings.length === 0 && (
+				<h3>Oh! No writing exercise for today. You can take a break</h3>
+			)}
+			{writings.map((exercise) => (
+				<ExerciseCard exercise={exercise} key={exercise.id} />
+			))}
+
 			<hr />
 			{/* About Section */}
 			<Container>
