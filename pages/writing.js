@@ -4,8 +4,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '@/components/Filter';
 import ExerciseCard from '@/components/ExerciseCard';
+import { API_URL } from '@/config/index';
 
-export default function writing() {
+export async function getServerSideProps() {
+	const res = await fetch(`${API_URL}/writings?_sort=date:ASC`);
+	const writings = await res.json();
+	return {
+		props: { writings }
+	};
+}
+
+export default function writing({ writings }) {
 	return (
 		<Layout>
 			<Container>
@@ -19,7 +28,9 @@ export default function writing() {
 				</Row>
 				<hr></hr>
 				<Row>
-					<ExerciseCard />
+					{writings.map((exercise) => (
+						<ExerciseCard exercise={exercise} key={exercise.id} />
+					))}
 				</Row>
 			</Container>
 		</Layout>
