@@ -26,7 +26,7 @@ export default function HomePage({ readings, writings }) {
 	console.log(writings);
 	return (
 		<Layout>
-			<h2>最新Reading練習</h2>
+			<h2 className='mt-5'>最新Reading練習</h2>
 			{readings.length === 0 && (
 				<h3>Oh! No reading exercise for today. You can take a break</h3>
 			)}
