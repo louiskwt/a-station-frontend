@@ -13,6 +13,9 @@ export default function ExerciseCard({ exercise }) {
 					<Card.Title>{exercise.title} </Card.Title>
 					<span className=' badge-pill badge-dark'>
 						{exercise.tag}
+					</span>{' '}
+					<span className=' badge-pill badge-warning'>
+						Difficulty Lv: {exercise.level}
 					</span>
 					<Card.Text className='mt-3'>
 						{exercise.description}
