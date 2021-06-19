@@ -16,10 +16,6 @@ export async function getServerSideProps() {
 		writingsRes.json()
 	]);
 
-	// const res = await fetch(`${API_URL}/readings?_sort=date:ASC`);
-	// const readings = await res.json();
-	// console.log(readings);
-
 	return {
 		props: { readings, writings }
 	};

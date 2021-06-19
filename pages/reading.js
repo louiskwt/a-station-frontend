@@ -4,8 +4,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '@/components/Filter';
 import ExerciseCard from '@/components/ExerciseCard';
+import { API_URL } from '@/config/index';
 
-export default function ReadingPage() {
+export async function getServerSideProps() {
+	const res = await fetch(`${API_URL}/readings?_sort=date:ASC`);
+	const readings = await res.json();
+	return {
+		props: { readings }
+	};
+}
+
+export default function ReadingPage({ readings }) {
 	return (
 		<Layout>
 			<Container>
@@ -19,7 +28,9 @@ export default function ReadingPage() {
 				</Row>
 				<hr></hr>
 				<Row>
-					<ExerciseCard />
+					{readings.map((exercise) => (
+						<ExerciseCard exercise={exercise} key={exercise.id} />
+					))}
 				</Row>
 			</Container>
 		</Layout>
