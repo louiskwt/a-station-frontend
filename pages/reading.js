@@ -27,11 +27,14 @@ export default function ReadingPage({ readings }) {
 					</Col>
 				</Row>
 				<hr></hr>
-				<Row>
-					{readings.map((exercise) => (
-						<ExerciseCard exercise={exercise} key={exercise.id} />
-					))}
-				</Row>
+
+				{readings.map((exercise) => (
+					<ExerciseCard
+						exercise={exercise}
+						key={exercise.id}
+						className='w-100'
+					/>
+				))}
 			</Container>
 		</Layout>
 	);

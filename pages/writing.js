@@ -27,11 +27,9 @@ export default function writing({ writings }) {
 					</Col>
 				</Row>
 				<hr></hr>
-				<Row>
-					{writings.map((exercise) => (
-						<ExerciseCard exercise={exercise} key={exercise.id} />
-					))}
-				</Row>
+				{writings.map((exercise) => (
+					<ExerciseCard exercise={exercise} key={exercise.id} />
+				))}
 			</Container>
 		</Layout>
 	);
