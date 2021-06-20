@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import styles from '@/styles/ExerciseCard.module.css';
+import Link from 'next/link';
 
 export default function ExerciseCard({ exercise }) {
 	return (
@@ -20,7 +20,9 @@ export default function ExerciseCard({ exercise }) {
 					<Card.Text className='mt-3'>
 						{exercise.description}
 					</Card.Text>
-					<Button variant='primary'>做練習</Button>
+					<Link href={`/${exercise.type}/${exercise.slug}`}>
+						<a className='btn btn-primary'>做練習</a>
+					</Link>
 				</Card.Body>
 			</Card>
 		</>
