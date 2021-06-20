@@ -15,6 +15,7 @@ export async function getServerSideProps() {
 }
 
 export default function ReadingPage({ readings }) {
+	const tags = ['opposite meaning', 'similar meaing', 'T/F/NG'];
 	return (
 		<Layout>
 			<Container>
@@ -23,7 +24,7 @@ export default function ReadingPage({ readings }) {
 						<h2 className='mt-5'>閱讀訓練</h2>
 					</Col>
 					<Col>
-						<Filter />
+						<Filter tags={tags} />
 					</Col>
 				</Row>
 				<hr></hr>

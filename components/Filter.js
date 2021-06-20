@@ -1,14 +1,19 @@
 import Form from 'react-bootstrap/Form';
 
-export default function Filter() {
+export default function Filter({ tags }) {
+	const handleChange = (e) => {
+		console.log('fired');
+		console.log(e.target.value);
+	};
 	return (
-		<Form className='mt-5'>
+		<Form className='mt-5' onChange={handleChange}>
 			<Form.Control as='select'>
 				<option>題型分類</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
+				{tags.map((tag) => (
+					<option value={tag} key={tag}>
+						{tag}
+					</option>
+				))}
 			</Form.Control>
 		</Form>
 	);
