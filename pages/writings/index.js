@@ -15,7 +15,8 @@ export async function getServerSideProps() {
 }
 
 export default function writing({ writings }) {
-	const tags = ['gerund / to-infinitive', 'present tense', 'past tense'];
+	const tags = ['gerund/to-infinitive', 'present tense', 'past tense'];
+	const type = 'writings';
 
 	return (
 		<Layout title='Writings'>
@@ -25,7 +26,7 @@ export default function writing({ writings }) {
 						<h2 className='mt-5'>寫作訓練</h2>
 					</Col>
 					<Col>
-						<Filter tags={tags} />
+						<Filter tags={tags} type={type} />
 					</Col>
 				</Row>
 				<hr></hr>

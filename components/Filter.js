@@ -1,9 +1,11 @@
 import Form from 'react-bootstrap/Form';
+import { useRouter } from 'next/router';
 
-export default function Filter({ tags }) {
+export default function Filter({ tags, type }) {
+	console.log(type);
+	const router = useRouter();
 	const handleChange = (e) => {
-		console.log('fired');
-		console.log(e.target.value);
+		router.push(`/${type}/filter?tag=${e.target.value}`);
 	};
 	return (
 		<Form className='mt-5' onChange={handleChange}>
