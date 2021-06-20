@@ -11,12 +11,12 @@ export default function Header() {
 			<Navbar.Toggle aria-controls='responsive-header' />
 			<Navbar.Collapse id='responsive-header'>
 				<Nav className='mr-auto'>
-					<Link href='/reading'>
+					<Link href='/readings'>
 						<span className='nav-link' role='button'>
 							Reading
 						</span>
 					</Link>
-					<Link href='/writing' className='nav-link'>
+					<Link href='/writings' className='nav-link'>
 						<span className='nav-link' role='button'>
 							Writing
 						</span>
