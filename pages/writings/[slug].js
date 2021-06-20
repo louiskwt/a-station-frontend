@@ -18,7 +18,7 @@ export default function WritingExPage({ ex }) {
 	return (
 		<Layout title='Ex'>
 			<h1>Writing Ex Page</h1>
-			<Link href='/readings'>
+			<Link href='/writings'>
 				<Button variant='light'>Back</Button>
 			</Link>
 		</Layout>
