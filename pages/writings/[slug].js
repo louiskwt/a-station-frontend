@@ -16,7 +16,7 @@ export async function getServerSideProps({ query: { slug } }) {
 export default function WritingExPage({ ex }) {
 	console.log(ex);
 	return (
-		<Layout title='Ex'>
+		<Layout title={ex.title}>
 			<h1>Writing Ex Page</h1>
 			<Link href='/writings'>
 				<Button variant='light'>Back</Button>

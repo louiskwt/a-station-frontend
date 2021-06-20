@@ -18,7 +18,7 @@ export default function ReadingExPage({ ex }) {
 	const router = useRouter();
 	console.log(ex);
 	return (
-		<Layout title='Ex'>
+		<Layout title={ex.title}>
 			<h1>Reading Ex Page</h1>
 			<Link href='/readings'>
 				<Button variant='light'>Back</Button>

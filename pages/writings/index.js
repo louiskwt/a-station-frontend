@@ -18,7 +18,7 @@ export default function writing({ writings }) {
 	const tags = ['gerund / to-infinitive', 'present tense', 'past tense'];
 
 	return (
-		<Layout>
+		<Layout title='Writings'>
 			<Container>
 				<Row>
 					<Col>
