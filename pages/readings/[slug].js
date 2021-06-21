@@ -1,8 +1,9 @@
-import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import { API_URL } from '@/config/index';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Image from 'next/image';
 
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
@@ -15,14 +16,23 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex }) {
-	const router = useRouter();
 	console.log(ex);
 	return (
 		<Layout title={ex.title}>
-			<h1>Reading Ex Page</h1>
-			<Link href='/readings'>
-				<Button variant='light'>Back</Button>
-			</Link>
+			<Container>
+				<h2 className='mt-3'>{ex.title}</h2>
+				<br />
+				<br />
+				<Image
+					src={ex.cover.formats.medium.url}
+					alt='cover'
+					width={750}
+					height={422}
+				/>
+				<Link href='/readings'>
+					<Button variant='light'>Back</Button>
+				</Link>
+			</Container>
 		</Layout>
 	);
 }
