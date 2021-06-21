@@ -23,16 +23,18 @@ export default function ReadingExPage({ ex }) {
 				<h2 className='mt-3'>{ex.title}</h2>
 				<br />
 				<br />
-				<Image
-					src={ex.cover.formats.medium.url}
-					alt='cover'
-					width={750}
-					height={422}
-				/>
-				<Link href='/readings'>
-					<Button variant='light'>Back</Button>
-				</Link>
+				<div className='text-center'>
+					<Image
+						src={ex.cover.formats.medium.url}
+						alt='cover'
+						width={750}
+						height={422}
+					/>
+				</div>
 			</Container>
+			<Link href='/readings'>
+				<Button variant='light'>Back</Button>
+			</Link>
 		</Layout>
 	);
 }
