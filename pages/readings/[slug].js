@@ -37,7 +37,7 @@ export default function ReadingExPage({ ex }) {
 				<Passage text={ex.passage} title={ex.title} />
 
 				<br />
-				<MCPanel />
+				{ex.mc ? <MCPanel /> : <p>Short text</p>}
 			</Container>
 			<br></br>
 			<Link href='/readings'>
