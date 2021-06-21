@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Image from 'next/image';
+import Passage from '@/components/Passage';
 
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
@@ -25,13 +26,17 @@ export default function ReadingExPage({ ex }) {
 				<br />
 				<div className='text-center'>
 					<Image
-						src={ex.cover.formats.medium.url}
+						src={ex.cover.formats.small.url}
 						alt='cover'
-						width={750}
-						height={422}
+						width={ex.cover.formats.small.width}
+						height={ex.cover.formats.small.height}
 					/>
 				</div>
+				<div>
+					<Passage text={ex.passage} title={ex.title} />
+				</div>
 			</Container>
+			<br></br>
 			<Link href='/readings'>
 				<Button variant='light'>Back</Button>
 			</Link>
