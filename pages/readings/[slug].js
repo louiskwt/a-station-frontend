@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Image from 'next/image';
 import Passage from '@/components/Passage';
+import AnswerPanel from '@/components/AnswerPanel';
 
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
@@ -32,9 +33,11 @@ export default function ReadingExPage({ ex }) {
 						height={ex.cover.formats.small.height}
 					/>
 				</div>
-				<div>
-					<Passage text={ex.passage} title={ex.title} />
-				</div>
+				<br />
+				<Passage text={ex.passage} title={ex.title} />
+
+				<br />
+				<AnswerPanel />
 			</Container>
 			<br></br>
 			<Link href='/readings'>
