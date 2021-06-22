@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Image from 'next/image';
 import Passage from '@/components/Passage';
 import MCPanel from '@/components/MCPanel';
+import SAPanel from '@/components/SAPanel';
 
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
@@ -37,7 +38,7 @@ export default function ReadingExPage({ ex }) {
 				<Passage text={ex.passage} title={ex.title} />
 
 				<br />
-				{ex.mc ? <MCPanel /> : <p>Short text</p>}
+				{ex.mc ? <MCPanel /> : <SAPanel />}
 			</Container>
 			<br></br>
 			<Link href='/readings'>
