@@ -15,7 +15,7 @@ export async function getServerSideProps() {
 }
 
 export default function ReadingPage({ readings }) {
-	const tags = ['opposite meaning', 'similar meaing', 'T/F/NG'];
+	const tags = ['opposite meaning', 'similar meaning', 'T/F/NG'];
 	const type = 'readings';
 	return (
 		<Layout title='Readings'>
