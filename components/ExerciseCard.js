@@ -7,7 +7,8 @@ export default function ExerciseCard({ exercise }) {
 		<>
 			<Card className='mt-4'>
 				<Card.Header as='h5' className='bg-light'>
-					Ex {exercise.id}
+					{exercise.type === 'readings' ? 'R-' : 'W-'}
+					{exercise.id}
 				</Card.Header>
 				<Card.Body className={styles.tag}>
 					<Card.Title>{exercise.title} </Card.Title>
