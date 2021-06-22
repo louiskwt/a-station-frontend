@@ -11,6 +11,8 @@ export async function getServerSideProps({ query: { tag } }) {
 			_or: [{ tag_contains: tag }]
 		}
 	});
+	console.log(query);
+
 	// Passing the query term to access the result
 	const res = await fetch(`${API_URL}/readings?${query}`);
 	const ex = await res.json();

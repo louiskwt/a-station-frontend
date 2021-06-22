@@ -25,7 +25,7 @@ export default function WritingFilterPage({ ex }) {
 	const router = useRouter();
 	return (
 		<Layout>
-			<Link href='/readings'>
+			<Link href='/writings'>
 				<a className='mt-5 btn btn-warning'>Clear Filter Result</a>
 			</Link>
 			<h3>Filter result for: {router.query.tag}</h3>
