@@ -38,7 +38,11 @@ export default function ReadingExPage({ ex }) {
 				<Passage text={ex.passage} title={ex.title} />
 
 				<br />
-				{ex.mc ? <MCPanel /> : <SAPanel />}
+				{ex.mc ? (
+					<MCPanel questions={ex.questions} />
+				) : (
+					<SAPanel questions={ex.questions} />
+				)}
 			</Container>
 			<br></br>
 			<Link href='/readings'>
