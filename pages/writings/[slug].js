@@ -18,7 +18,7 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex }) {
-	console.log(ex);
+	console.log(ex.answers);
 	return (
 		<Layout title={ex.title}>
 			<Container>
@@ -34,7 +34,11 @@ export default function WritingExPage({ ex }) {
 					/>
 				</div>
 				<br />
-				{ex.mc ? <MCPanel questions={ex.questions} /> : <SAPanel />}
+				{ex.mc ? (
+					<MCPanel questions={ex.questions} answers={ex.answers} />
+				) : (
+					<SAPanel />
+				)}
 			</Container>
 			<br />
 			<br />

@@ -19,7 +19,7 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex }) {
-	console.log(ex);
+	console.log(ex.id);
 	return (
 		<Layout title={ex.title}>
 			<Container>
@@ -39,9 +39,9 @@ export default function ReadingExPage({ ex }) {
 
 				<br />
 				{ex.mc ? (
-					<MCPanel questions={ex.questions} />
+					<MCPanel questions={ex.questions} answers={ex.answers} />
 				) : (
-					<SAPanel questions={ex.questions} />
+					<SAPanel questions={ex.questions} answers={ex.answers} />
 				)}
 			</Container>
 			<br></br>

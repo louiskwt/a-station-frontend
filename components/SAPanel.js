@@ -3,7 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function SAPanel({ questions }) {
+export default function SAPanel({ questions, answers }) {
+	console.log(answers);
 	const questionData = questions.questions[0];
 	console.log(questionData.options.length);
 

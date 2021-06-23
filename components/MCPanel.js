@@ -1,7 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-export default function AnswerPanel({ questions }) {
+export default function AnswerPanel({ questions, answers }) {
+	const ans = answers.answers;
 	const questionData = questions.questions;
 	const instruction = questions.instruction;
 
@@ -21,6 +22,7 @@ export default function AnswerPanel({ questions }) {
 				}
 			}
 		}
+		console.log(ans);
 		console.log(responseArr);
 	};
 	return (
