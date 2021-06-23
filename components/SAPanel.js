@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 export default function SAPanel({ questions, answers }) {
-	console.log(answers);
+	const ans = answers.answers;
 	const questionData = questions.questions[0];
 	console.log(questionData.options.length);
 
@@ -19,6 +19,7 @@ export default function SAPanel({ questions, answers }) {
 			response.push(input);
 		}
 		console.log(response);
+		console.log(ans);
 	};
 
 	return (

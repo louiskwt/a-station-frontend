@@ -37,7 +37,7 @@ export default function WritingExPage({ ex }) {
 				{ex.mc ? (
 					<MCPanel questions={ex.questions} answers={ex.answers} />
 				) : (
-					<SAPanel />
+					<SAPanel answers={ex.answers} />
 				)}
 			</Container>
 			<br />
