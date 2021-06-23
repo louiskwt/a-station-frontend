@@ -18,7 +18,6 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex }) {
-	console.log(ex.answers);
 	return (
 		<Layout title={ex.title}>
 			<Container>

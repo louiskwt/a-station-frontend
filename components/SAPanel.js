@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 export default function SAPanel({ questions, answers }) {
 	const ans = answers.answers;
 	const questionData = questions.questions[0];
-	console.log(questionData.options.length);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
