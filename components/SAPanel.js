@@ -5,10 +5,19 @@ import Col from 'react-bootstrap/Col';
 
 export default function SAPanel({ questions }) {
 	const questionData = questions.questions[0];
-	console.log(questionData.options);
+	console.log(questionData.options.length);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log('submitted');
+		// Getting the input values
+		const totalQuestion = questionData.options.length;
+		let response = [];
+		for (let i = 0; i < totalQuestion; i++) {
+			const input = `e.target.q${i + 1}.value`;
+			input = eval(input);
+			response.push(input);
+		}
+		console.log(response);
 	};
 
 	return (
@@ -24,6 +33,7 @@ export default function SAPanel({ questions }) {
 						</Form.Label>
 						<Col sm='6'>
 							<Form.Control
+								name={`q${index + 1}`}
 								type='text'
 								placeholder='Write your answer here'
 							/>
