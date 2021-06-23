@@ -19,7 +19,7 @@ export default function writing({ writings }) {
 	const type = 'writings';
 
 	return (
-		<Layout title='Writings'>
+		<Layout title='Writing Exercises | a-station'>
 			<Container>
 				<Row>
 					<Col>

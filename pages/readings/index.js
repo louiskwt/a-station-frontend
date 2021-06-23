@@ -18,7 +18,7 @@ export default function ReadingPage({ readings }) {
 	const tags = ['opposite meaning', 'similar meaning', 'T/F/NG'];
 	const type = 'readings';
 	return (
-		<Layout title='Readings'>
+		<Layout title='Reading Exercises | a-station'>
 			<Container>
 				<Row>
 					<Col>
