@@ -11,15 +11,16 @@ export default function Score({ scoringData }) {
 				score += 1;
 			}
 		});
-		console.log(score);
+		return score;
 	};
-	calculatingScore(scoringData);
-
 	return (
 		<div>
 			{/* Score */}
 			<div className='text-center'>
-				<h4>Score</h4>
+				<h4>
+					Score : {calculatingScore(scoringData)} / {total}
+				</h4>
+				<br />
 			</div>
 			{/* Table */}
 			<Table striped bordered hover>
