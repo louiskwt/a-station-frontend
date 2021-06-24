@@ -2,23 +2,36 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useState, useRef } from 'react';
+import Score from './Score';
 
 export default function SAPanel({ questions, answers }) {
+	// React Hooks
+	const [attempt, setAttempt] = useState(false);
+	const [scoringData, setScoringData] = useState([]);
+
+	const btnEl = useRef(null);
+	// Ex variables
 	const ans = answers.answers;
 	const questionData = questions.questions[0];
+	const scoringArr = [];
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// Getting the input values
 		const totalQuestion = questionData.options.length;
-		let response = [];
+
 		for (let i = 0; i < totalQuestion; i++) {
 			const input = `e.target.q${i + 1}.value`;
 			input = eval(input);
-			response.push(input);
+			scoringArr.push({ response: input, answer: ans[i] });
 		}
-		console.log(response);
-		console.log(ans);
+
+		setScoringData(scoringArr);
+		btnEl.current.blur();
+		btnEl.current.disabled = 'true';
+
+		setAttempt(true);
 	};
 
 	return (
@@ -42,9 +55,11 @@ export default function SAPanel({ questions, answers }) {
 					</Form.Group>
 				))}
 
-				<Button variant='success' type='submit'>
+				<Button variant='success' type='submit' ref={btnEl}>
 					Submit
 				</Button>
+
+				{attempt && <Score scoringData={scoringData} />}
 			</Form>
 		</div>
 	);
