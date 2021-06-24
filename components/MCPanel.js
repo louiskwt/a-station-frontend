@@ -6,6 +6,7 @@ import Score from './Score';
 export default function AnswerPanel({ questions, answers }) {
 	// react hooks
 	const [attempt, setAttempt] = useState(false);
+	const [scoringData, setScoringData] = useState([]);
 	const btnEl = useRef(null);
 	// exercise variable
 	const ans = answers.answers;
@@ -15,29 +16,28 @@ export default function AnswerPanel({ questions, answers }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const total = questions.questions.length;
+		const scoringArr = [];
 
-		const scoringData = [];
 		// Getting the selected options from users
 		for (let i = 0; i < total; i++) {
 			const target = `e.target.q${i + 1}`;
 			target = eval(target);
 			const optionArr = Array.from(target);
+
 			for (let j = 0; j < optionArr.length; j++) {
 				if (optionArr[j].checked === true) {
-					scoringData.push({
+					scoringArr.push({
 						response: optionArr[j].id,
 						answer: ans[i]
 					});
 				}
 			}
 		}
-
-		setAttempt(true);
+		setScoringData(scoringArr);
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
-		console.log(scoringData);
-		console.log(btnEl.current);
-		// return scoringData;
+
+		setAttempt(true);
 	};
 
 	return (
@@ -67,7 +67,7 @@ export default function AnswerPanel({ questions, answers }) {
 				<Button variant='success' type='submit' ref={btnEl}>
 					Submit
 				</Button>
-				{/* {attempt && <Score ans={ans} response={responseArr} />} */}
+				{attempt ? <Score scoringData={scoringData} /> : ''}
 			</Form>
 		</div>
 	);

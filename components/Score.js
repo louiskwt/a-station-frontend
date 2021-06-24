@@ -1,6 +1,7 @@
 import Table from 'react-bootstrap/Table';
 
-export default function Score({ response, ans }) {
+export default function Score({ scoringData }) {
+	console.log(scoringData);
 	return (
 		<div>
 			{/* Score */}
@@ -16,7 +17,15 @@ export default function Score({ response, ans }) {
 						<th>Correct Answer</th>
 					</tr>
 				</thead>
-				<tbody>{/* dynamic data */}</tbody>
+				<tbody>
+					{scoringData.map((data, index) => (
+						<tr>
+							<td>{index + 1}</td>
+							<td>{data.response}</td>
+							<td>{data.answer}</td>
+						</tr>
+					))}
+				</tbody>
 			</Table>
 		</div>
 	);
