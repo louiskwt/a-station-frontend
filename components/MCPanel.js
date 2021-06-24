@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useRef } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
 
 export default function AnswerPanel({ questions, answers }) {
@@ -23,13 +25,20 @@ export default function AnswerPanel({ questions, answers }) {
 			const target = `e.target.q${i + 1}`;
 			target = eval(target);
 			const optionArr = Array.from(target);
-
+			let answered = false;
 			for (let j = 0; j < optionArr.length; j++) {
 				if (optionArr[j].checked === true) {
 					scoringArr.push({
 						response: optionArr[j].id,
 						answer: ans[i]
 					});
+					answered = true;
+				}
+				if (answered === false) {
+					toast.error('請先回答所有問題', {
+						position: 'top-center'
+					});
+					return;
 				}
 			}
 		}
@@ -42,6 +51,7 @@ export default function AnswerPanel({ questions, answers }) {
 
 	return (
 		<div className='mt-4 col-10 offset-1'>
+			<ToastContainer />
 			<Form onSubmit={handleSubmit}>
 				<h5>{instruction}</h5>
 				{questionData.map((data, index) => (
@@ -58,7 +68,6 @@ export default function AnswerPanel({ questions, answers }) {
 								label={option}
 								key={option}
 								id={option}
-								required
 							/>
 						))}
 					</Form.Group>
