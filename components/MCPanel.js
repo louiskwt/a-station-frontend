@@ -1,7 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useState, useRef } from 'react';
+import Score from './Score';
 
 export default function AnswerPanel({ questions, answers }) {
+	// react hooks
+	const [attempt, setAttempt] = useState(false);
+	const btnEl = useRef(null);
+	// exercise variable
 	const ans = answers.answers;
 	const questionData = questions.questions;
 	const instruction = questions.instruction;
@@ -10,7 +16,7 @@ export default function AnswerPanel({ questions, answers }) {
 		e.preventDefault();
 		const total = questions.questions.length;
 
-		const responseArr = [];
+		const scoringData = [];
 		// Getting the selected options from users
 		for (let i = 0; i < total; i++) {
 			const target = `e.target.q${i + 1}`;
@@ -18,13 +24,22 @@ export default function AnswerPanel({ questions, answers }) {
 			const optionArr = Array.from(target);
 			for (let j = 0; j < optionArr.length; j++) {
 				if (optionArr[j].checked === true) {
-					responseArr.push(optionArr[j].id);
+					scoringData.push({
+						response: optionArr[j].id,
+						answer: ans[i]
+					});
 				}
 			}
 		}
-		console.log(ans);
-		console.log(responseArr);
+
+		setAttempt(true);
+		btnEl.current.blur();
+		btnEl.current.disabled = 'true';
+		console.log(scoringData);
+		console.log(btnEl.current);
+		// return scoringData;
 	};
+
 	return (
 		<div className='mt-4 col-10 offset-1'>
 			<Form onSubmit={handleSubmit}>
@@ -43,14 +58,16 @@ export default function AnswerPanel({ questions, answers }) {
 								label={option}
 								key={option}
 								id={option}
+								required
 							/>
 						))}
 					</Form.Group>
 				))}
 
-				<Button variant='success' type='submit'>
+				<Button variant='success' type='submit' ref={btnEl}>
 					Submit
 				</Button>
+				{/* {attempt && <Score ans={ans} response={responseArr} />} */}
 			</Form>
 		</div>
 	);

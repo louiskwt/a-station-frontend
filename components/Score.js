@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
 
-export default function Score({ res, ans }) {
+export default function Score({ response, ans }) {
 	return (
 		<div>
 			{/* Score */}
