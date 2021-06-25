@@ -3,25 +3,51 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LoginPage() {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (e.target.email.value === '' || e.target.password.value === '') {
+			toast.error('請先輸入電郵和密碼', {
+				position: 'top-center'
+			});
+			return;
+		}
+	};
+
 	return (
 		<Layout>
+			<ToastContainer />
 			<Container>
 				<h2 className='text-center mt-5'>登入 A-Station</h2>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<Form.Group>
 						<Form.Label>Email</Form.Label>
 
-						<Form.Control type='email' placeholder='Email' />
+						<Form.Control
+							type='email'
+							placeholder='Email'
+							name='email'
+						/>
 					</Form.Group>
 
 					<Form.Group className='mt-4'>
 						<Form.Label>Password</Form.Label>
 
-						<Form.Control type='password' placeholder='Password' />
+						<Form.Control
+							type='password'
+							placeholder='Password'
+							name='password'
+						/>
 					</Form.Group>
-					<Button variant='success' className='mt-5' block>
+					<Button
+						variant='success'
+						className='mt-5'
+						type='submit'
+						block
+					>
 						登入
 					</Button>
 				</Form>
