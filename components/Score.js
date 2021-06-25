@@ -1,24 +1,40 @@
 import Table from 'react-bootstrap/Table';
+import { useEffect, useState } from 'react';
 
 export default function Score({ scoringData }) {
-	console.log(scoringData);
 	const total = scoringData.length;
-	console.log(total);
-	const calculatingScore = (scoringData) => {
-		let score = 0;
+
+	const calculatingPoint = (scoringData) => {
+		let point = 0;
 		scoringData.map((data) => {
 			if (data.response === data.answer) {
-				score += 1;
+				point += 1;
 			}
 		});
-		return score;
+		return point;
 	};
+
+	const [score, setSscore] = useState(0);
+	useEffect(() => {
+		const totalPoint = calculatingPoint(scoringData);
+		const timer = setInterval(() => {
+			if (score === totalPoint) {
+				return;
+			} else {
+				setSscore(score + 1);
+			}
+		}, 300);
+		return () => {
+			clearInterval(timer);
+		};
+	});
+
 	return (
 		<div>
 			{/* Score */}
 			<div className='text-center'>
 				<h4>
-					Score : {calculatingScore(scoringData)} / {total}
+					Score : {score} / {total}
 				</h4>
 				<br />
 			</div>
