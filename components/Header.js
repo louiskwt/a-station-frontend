@@ -26,11 +26,19 @@ export default function Header() {
 				</Nav>
 				<Nav>
 					{router.pathname === '/' ? (
-						<Link href='/login'>
-							<span className='nav-link' role='button'>
-								登入
-							</span>
-						</Link>
+						<>
+							<Link href='/login'>
+								<span className='nav-link' role='button'>
+									登入
+								</span>
+							</Link>
+
+							<Link href='/signup'>
+								<span className='nav-link' role='button'>
+									註冊
+								</span>
+							</Link>
+						</>
 					) : (
 						' '
 					)}
