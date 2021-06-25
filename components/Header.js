@@ -1,8 +1,10 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Link from 'next/link';
 import Nav from 'react-bootstrap/Nav';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+	const router = useRouter();
 	return (
 		<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
 			<Link href='/'>
@@ -23,9 +25,15 @@ export default function Header() {
 					</Link>
 				</Nav>
 				<Nav>
-					<Link href='/login'>
-						<Nav.Link>登入</Nav.Link>
-					</Link>
+					{router.pathname === '/' ? (
+						<Link href='/login'>
+							<span className='nav-link' role='button'>
+								登入
+							</span>
+						</Link>
+					) : (
+						' '
+					)}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
