@@ -11,6 +11,7 @@ import SAPanel from '@/components/SAPanel';
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
 	const ex = await res.json();
+
 	return {
 		props: {
 			ex: ex[0]
