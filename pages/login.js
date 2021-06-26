@@ -5,8 +5,11 @@ import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthContext from '@/context/AuthContext';
+import { useState, useContext } from 'react';
 
 export default function LoginPage() {
+	const { login, error } = useContext(AuthContext);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (e.target.email.value === '' || e.target.password.value === '') {
@@ -15,6 +18,7 @@ export default function LoginPage() {
 			});
 			return;
 		}
+		login({ email: 'louis', password: '1234' });
 	};
 
 	return (

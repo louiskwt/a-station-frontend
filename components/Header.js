@@ -1,10 +1,11 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Link from 'next/link';
 import Nav from 'react-bootstrap/Nav';
-import { useRouter } from 'next/router';
+import AuthContext from '@/context/AuthContext';
+import { useContext } from 'react';
 
 export default function Header() {
-	const router = useRouter();
+	const { user, logout } = useContext(AuthContext);
 	return (
 		<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
 			<Link href='/'>
@@ -25,7 +26,18 @@ export default function Header() {
 					</Link>
 				</Nav>
 				<Nav>
-					{router.pathname === '/' ? (
+					{user ? (
+						// If logged in
+						<>
+							{' '}
+							<Link href='/logout'>
+								<span className='nav-link' role='button'>
+									登出
+								</span>
+							</Link>
+						</>
+					) : (
+						// If logged out
 						<>
 							<Link href='/login'>
 								<span className='nav-link' role='button'>
@@ -39,8 +51,6 @@ export default function Header() {
 								</span>
 							</Link>
 						</>
-					) : (
-						' '
 					)}
 				</Nav>
 			</Navbar.Collapse>

@@ -5,8 +5,12 @@ import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthContext from '@/context/AuthContext';
+import { useContext } from 'react';
 
 export default function SignUpPage() {
+	const { register, error } = useContext(AuthContext);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (e.target.email.value === '' || e.target.password.value === '') {
@@ -21,6 +25,7 @@ export default function SignUpPage() {
 			});
 			return;
 		}
+		register();
 	};
 	return (
 		<Layout>
