@@ -22,8 +22,6 @@ export async function getServerSideProps() {
 }
 
 export default function HomePage({ readings, writings }) {
-	console.log(readings);
-	console.log(writings);
 	return (
 		<Layout>
 			<h2 className='mt-5'>最新Reading練習</h2>

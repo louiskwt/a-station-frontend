@@ -2,7 +2,6 @@ import Card from 'react-bootstrap/Card';
 import styles from '@/styles/Passage.module.css';
 
 export default function Passage({ text, title }) {
-	console.log(text);
 	return (
 		<div className='col-10 offset-1 mt-3'>
 			<Card>
