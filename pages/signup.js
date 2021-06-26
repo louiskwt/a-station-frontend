@@ -6,21 +6,32 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '@/context/AuthContext';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 
 export default function SignUpPage() {
+	// ContextAPI functions and state
 	const { register, error } = useContext(AuthContext);
+	// Signup State
+	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (e.target.email.value === '' || e.target.password.value === '') {
-			toast.error('請先輸入電郵和密碼', {
+		if (
+			username === '' ||
+			email === '' ||
+			password === '' ||
+			confirmPassword === ''
+		) {
+			toast.error('所有欄目都而要填寫哦', {
 				position: 'top-center'
 			});
 			return;
 		}
-		if (e.target.password.value !== e.target.confirmPassword.value) {
-			toast.error('兩次輸入的密碼不一樣', {
+		if (password !== confirmPassword) {
+			toast.error('噢～兩次輸入的密碼都不一樣呢', {
 				position: 'top-center'
 			});
 			return;
@@ -34,12 +45,25 @@ export default function SignUpPage() {
 				<h2 className='text-center mt-5'>註冊新帳户</h2>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group>
+						<Form.Label>Username</Form.Label>
+
+						<Form.Control
+							type='text'
+							placeholder='Username'
+							name='username'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group className='mt-4'>
 						<Form.Label>Email</Form.Label>
 
 						<Form.Control
 							type='email'
 							placeholder='Email'
 							name='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<Form.Text className='text-muted'>
 							放心，我們跟你一樣很著重個人私隱，所以我們承諾不會把你的email分享給其他人
@@ -53,6 +77,8 @@ export default function SignUpPage() {
 							type='password'
 							placeholder='Password'
 							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<Form.Text className='text-muted'>
 							密碼要是6個字以上，需要包括數字和英文字母
@@ -66,6 +92,8 @@ export default function SignUpPage() {
 							type='password'
 							placeholder='Password'
 							name='confirmPassword'
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
 						/>
 					</Form.Group>
 
