@@ -36,7 +36,7 @@ export default function SignUpPage() {
 			});
 			return;
 		}
-		register();
+		register({ username, email, password });
 	};
 	return (
 		<Layout>
