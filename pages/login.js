@@ -9,7 +9,12 @@ import AuthContext from '@/context/AuthContext';
 import { useState, useContext } from 'react';
 
 export default function LoginPage() {
+	// ContextAPI state and function
 	const { login, error } = useContext(AuthContext);
+	// Login State
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (e.target.email.value === '' || e.target.password.value === '') {
@@ -18,7 +23,7 @@ export default function LoginPage() {
 			});
 			return;
 		}
-		login({ email: 'louis', password: '1234' });
+		login({ email, password });
 	};
 
 	return (
@@ -34,6 +39,8 @@ export default function LoginPage() {
 							type='email'
 							placeholder='Email'
 							name='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</Form.Group>
 
@@ -44,6 +51,8 @@ export default function LoginPage() {
 							type='password'
 							placeholder='Password'
 							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</Form.Group>
 					<Button
