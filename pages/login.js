@@ -10,19 +10,26 @@ import { useState, useEffect, useContext } from 'react';
 
 export default function LoginPage() {
 	// ContextAPI state and function
-	const { login, message } = useContext(AuthContext);
+	const { login, message, user } = useContext(AuthContext);
 	// Login State
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	// Strapi Error Handling
-	useEffect(
-		() =>
-			message &&
+	useEffect(() => {
+		if (!user && message) {
 			toast.error(message, {
 				position: 'top-center'
-			})
-	);
+			});
+		}
+
+		if (user && message) {
+			toast.success(message, {
+				position: 'top-center',
+				autoClose: 2000
+			});
+		}
+	});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

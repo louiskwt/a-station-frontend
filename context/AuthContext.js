@@ -38,7 +38,11 @@ export const AuthProvider = ({ children }) => {
 
 		if (res.ok) {
 			setUser(data.user);
-			router.push('/');
+			setMessage('歡迎回來～');
+			setMessage(null);
+			setTimeout(() => {
+				router.push('/');
+			}, 2000);
 		} else {
 			setMessage(data.message);
 			setMessage(null);
