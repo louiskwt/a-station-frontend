@@ -30,11 +30,13 @@ export default function Header() {
 						// If logged in
 						<>
 							{' '}
-							<Link href='/logout'>
-								<span className='nav-link' role='button'>
-									登出
-								</span>
-							</Link>
+							<span
+								className='nav-link'
+								role='button'
+								onClick={logout}
+							>
+								登出
+							</span>
 						</>
 					) : (
 						// If logged out
