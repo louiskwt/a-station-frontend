@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 	// State
 	const [user, setUser] = useState(null);
-	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
 
 	// Presisting user with ussEffect
 	useEffect(() => checkUserLoggedIn(), []);
@@ -40,8 +40,8 @@ export const AuthProvider = ({ children }) => {
 			setUser(data.user);
 			router.push('/');
 		} else {
-			setError(data.message);
-			setError(null);
+			setMessage(data.message);
+			setMessage(null);
 		}
 	};
 
@@ -70,7 +70,9 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, error, register, login, logout }}>
+		<AuthContext.Provider
+			value={{ user, message, register, login, logout }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
