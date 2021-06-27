@@ -1,13 +1,9 @@
-import { useEffect, useContext } from 'react';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { API_URL } from '@/config/index';
 import ExerciseCard from '@/components/ExerciseCard';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import AuthContext from '@/context/AuthContext';
 
 // Fetching data
 export async function getServerSideProps() {
@@ -26,17 +22,8 @@ export async function getServerSideProps() {
 }
 
 export default function HomePage({ readings, writings }) {
-	const [message, user] = useContext(AuthContext);
-	useEffect(
-		() =>
-			user &&
-			toast.success(message, {
-				position: 'top-center'
-			})
-	);
 	return (
 		<Layout>
-			<ToastContainer />
 			<h2 className='mt-5'>最新Reading練習</h2>
 			{readings.length === 0 && (
 				<h3>Oh! No reading exercise for today. You can take a break</h3>

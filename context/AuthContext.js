@@ -55,9 +55,13 @@ export const AuthProvider = ({ children }) => {
 			method: 'POST'
 		});
 
+		const data = await res.json();
+
 		if (res.ok) {
 			setUser(null);
+			alert(data.message);
 			router.push('/');
+			setMessage(null);
 		}
 	};
 

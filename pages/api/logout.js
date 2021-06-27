@@ -11,7 +11,7 @@ export default async (req, res) => {
 			path: '/'
 		});
 		// Response
-		res.status(200).json({ message: 'Successfully Logged out' });
+		res.status(200).json({ message: '登出成功，下次再見～' });
 	} else {
 		res.setHeader('Allow', ['POST']);
 		res.status(405).json({ message: `Method ${req.method} not allowed` });
