@@ -84,14 +84,14 @@ export const AuthProvider = ({ children }) => {
 		// const data = await res.json();
 
 		if (res.ok) {
-			setUser(null);
 			setStatus('success');
 			setMessage('登出成功');
 			setTimeout(() => {
 				router.push('/');
+				setUser(null);
 				setStatus(null);
 				setMessage(null);
-			}, 2000);
+			}, 500);
 		}
 	};
 
