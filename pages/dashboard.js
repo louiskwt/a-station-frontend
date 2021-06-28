@@ -20,7 +20,7 @@ export default function DashboardPage() {
 						</tr>
 						<tr>
 							<td>Membership: </td>
-							<td>Free</td>
+							<td>{user.membership}</td>
 						</tr>
 						<tr>
 							<td>註冊日期 </td>
