@@ -18,7 +18,30 @@ export const AuthProvider = ({ children }) => {
 
 	// Register user
 	const register = async (user) => {
-		console.log(user);
+		const res = await fetch(`${NEXT_URL}/api/register`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		});
+		const data = await res.json();
+
+		if (res.ok) {
+			setUser(data.user);
+			setStatus('success');
+			setMessage('註冊成功～');
+			setTimeout(() => {
+				router.push('/');
+				setStatus(null);
+				setMessage(null);
+			}, 2000);
+		} else {
+			setStatus('failed');
+			setMessage(data.message);
+			setMessage(null);
+			setStatus(null);
+		}
 	};
 
 	// Login user
