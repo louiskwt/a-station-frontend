@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 		if (res.ok) {
 			setUser(data.user);
 			setStatus('success');
-			setMessage('歡迎回來～');
+			setMessage('註冊成功！歡迎來到A-station～');
 			setTimeout(() => {
 				router.push('/');
 				setStatus(null);
