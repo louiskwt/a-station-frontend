@@ -10,7 +10,7 @@ import { useState, useContext } from 'react';
 
 export default function SignUpPage() {
 	// ContextAPI functions and state
-	const { register, message } = useContext(AuthContext);
+	const { register } = useContext(AuthContext);
 	// Signup State
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');

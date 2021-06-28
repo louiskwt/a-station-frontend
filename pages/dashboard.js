@@ -6,7 +6,6 @@ import { useContext } from 'react';
 
 export default function DashboardPage() {
 	const { user } = useContext(AuthContext);
-	const userInfo = [];
 
 	return (
 		<Layout>
