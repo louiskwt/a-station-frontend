@@ -2,15 +2,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import Link from 'next/link';
 import Nav from 'react-bootstrap/Nav';
 import AuthContext from '@/context/AuthContext';
+import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Header() {
 	const { user, logout, status, message } = useContext(AuthContext);
+	const router = useRouter();
 	// Strapi Error Handling
 	useEffect(() => {
-		if (status !== 'success' && message) {
+		if (status !== 'success' && message && router.pathname !== '/') {
 			toast.error(message, {
 				position: 'top-center'
 			});
