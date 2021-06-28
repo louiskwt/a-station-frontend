@@ -51,7 +51,11 @@ export default function Header() {
 						{user ? (
 							// If logged in
 							<>
-								{' '}
+								<Link href='/dashboard'>
+									<span className='nav-link' role='button'>
+										Hi, {user.username}
+									</span>
+								</Link>{' '}
 								<span
 									className='nav-link'
 									role='button'
