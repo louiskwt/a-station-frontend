@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 	// State
 	const [user, setUser] = useState(null);
 	const [message, setMessage] = useState(null);
+	const [status, setStatus] = useState(null);
 
 	// Presisting user with ussEffect
 	useEffect(() => checkUserLoggedIn(), []);
@@ -38,14 +39,18 @@ export const AuthProvider = ({ children }) => {
 
 		if (res.ok) {
 			setUser(data.user);
+			setStatus('success');
 			setMessage('歡迎回來～');
-			setMessage(null);
 			setTimeout(() => {
 				router.push('/');
+				setStatus(null);
+				setMessage(null);
 			}, 2000);
 		} else {
+			setStatus('failed');
 			setMessage(data.message);
 			setMessage(null);
+			setStatus(null);
 		}
 	};
 
@@ -55,13 +60,17 @@ export const AuthProvider = ({ children }) => {
 			method: 'POST'
 		});
 
-		const data = await res.json();
+		// const data = await res.json();
 
 		if (res.ok) {
 			setUser(null);
-			alert(data.message);
-			router.push('/');
-			setMessage(null);
+			setStatus('success');
+			setMessage('登出成功');
+			setTimeout(() => {
+				router.push('/');
+				setStatus(null);
+				setMessage(null);
+			}, 2000);
 		}
 	};
 
@@ -79,7 +88,7 @@ export const AuthProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ user, message, register, login, logout }}
+			value={{ user, message, register, login, logout, status }}
 		>
 			{children}
 		</AuthContext.Provider>

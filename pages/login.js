@@ -3,33 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '@/context/AuthContext';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 export default function LoginPage() {
 	// ContextAPI state and function
-	const { login, message, user } = useContext(AuthContext);
+	const { login } = useContext(AuthContext);
 	// Login State
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
-	// Strapi Error Handling
-	useEffect(() => {
-		if (!user && message) {
-			toast.error(message, {
-				position: 'top-center'
-			});
-		}
-
-		if (user && message) {
-			toast.success(message, {
-				position: 'top-center',
-				autoClose: 2000
-			});
-		}
-	});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -44,7 +26,6 @@ export default function LoginPage() {
 
 	return (
 		<Layout>
-			<ToastContainer />
 			<Container>
 				<h2 className='text-center mt-5'>登入 A-Station</h2>
 				<Form onSubmit={handleSubmit}>
