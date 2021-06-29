@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [message, setMessage] = useState(null);
 	const [status, setStatus] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	// Presisting user with ussEffect
 	useEffect(() => checkUserLoggedIn(), []);
@@ -35,9 +36,11 @@ export const AuthProvider = ({ children }) => {
 				router.push('/');
 				setStatus(null);
 				setMessage(null);
+				setLoading(false);
 			}, 2000);
 		} else {
 			setStatus('fail');
+			setLoading(false);
 			setMessage(data.message);
 			setMessage(null);
 			setStatus(null);
@@ -62,15 +65,17 @@ export const AuthProvider = ({ children }) => {
 			setUser(data.user);
 			setStatus('success');
 			setMessage('歡迎回來～');
+			setMessage(null);
 			setTimeout(() => {
 				router.push('/');
 				setStatus(null);
-				setMessage(null);
-			}, 2000);
+				setLoading(false);
+			}, 1000);
 		} else {
 			setStatus('failed');
 			setMessage(data.message);
 			setMessage(null);
+			setLoading(false);
 			setStatus(null);
 		}
 	};
@@ -86,11 +91,11 @@ export const AuthProvider = ({ children }) => {
 		if (res.ok) {
 			setStatus('success');
 			setMessage('登出成功');
+			setMessage(null);
 			setTimeout(() => {
 				router.push('/');
 				setUser(null);
 				setStatus(null);
-				setMessage(null);
 			}, 500);
 		}
 	};
@@ -109,7 +114,16 @@ export const AuthProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ user, message, register, login, logout, status }}
+			value={{
+				user,
+				message,
+				register,
+				login,
+				logout,
+				status,
+				loading,
+				setLoading
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

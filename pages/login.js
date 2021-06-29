@@ -2,23 +2,28 @@ import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import Link from 'next/link';
 import AuthContext from '@/context/AuthContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useContext } from 'react';
 
 export default function LoginPage() {
 	// ContextAPI state and function
-	const { login } = useContext(AuthContext);
+	const { login, loading, setLoading } = useContext(AuthContext);
 	// Login State
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setLoading(true);
 		if (e.target.email.value === '' || e.target.password.value === '') {
 			toast.error('請先輸入電郵和密碼', {
 				position: 'top-center'
 			});
+			setLoading(false);
 			return;
 		}
 		login({ email, password });
@@ -58,7 +63,18 @@ export default function LoginPage() {
 						type='submit'
 						block
 					>
-						登入
+						{loading ? (
+							<Spinner
+								as='span'
+								animation='border'
+								size='sm'
+								role='status'
+								aria-hidden='true'
+								variant='light'
+							/>
+						) : (
+							'登入'
+						)}
 					</Button>
 				</Form>
 				<p className='mt-5 text-center'>

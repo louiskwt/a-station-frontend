@@ -2,6 +2,7 @@ import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +11,7 @@ import { useState, useContext } from 'react';
 
 export default function SignUpPage() {
 	// ContextAPI functions and state
-	const { register } = useContext(AuthContext);
+	const { register, loading, setLoading } = useContext(AuthContext);
 	// Signup State
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -19,6 +20,7 @@ export default function SignUpPage() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setLoading(true);
 		if (
 			username === '' ||
 			email === '' ||
@@ -28,12 +30,14 @@ export default function SignUpPage() {
 			toast.error('所有欄目都而要填寫哦', {
 				position: 'top-center'
 			});
+			setLoading(false);
 			return;
 		}
 		if (password !== confirmPassword) {
 			toast.error('噢～兩次輸入的密碼都不一樣呢', {
 				position: 'top-center'
 			});
+			setLoading(false);
 			return;
 		}
 		register({ username, email, password });
@@ -103,7 +107,18 @@ export default function SignUpPage() {
 						type='submit'
 						block
 					>
-						註冊
+						{loading ? (
+							<Spinner
+								as='span'
+								animation='border'
+								size='sm'
+								role='status'
+								aria-hidden='true'
+								variant='light'
+							/>
+						) : (
+							'註冊'
+						)}
 					</Button>
 				</Form>
 				<p className='mt-5 text-center'>
