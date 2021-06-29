@@ -1,4 +1,5 @@
 import Table from 'react-bootstrap/Table';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useEffect, useState } from 'react';
 
 export default function Score({ scoringData }) {
@@ -15,8 +16,10 @@ export default function Score({ scoringData }) {
 	};
 
 	const [score, setSscore] = useState(0);
+
 	useEffect(() => {
 		const totalPoint = calculatingPoint(scoringData);
+
 		const timer = setInterval(() => {
 			if (score === totalPoint) {
 				return;
@@ -36,6 +39,13 @@ export default function Score({ scoringData }) {
 				<h4>
 					Score : {score} / {total}
 				</h4>
+				<br />
+				<br />
+				<ProgressBar
+					now={Math.round((score / total) * 100)}
+					label={`${Math.round((score / total) * 100)} %`}
+				/>
+				<br />
 				<br />
 			</div>
 			{/* Table */}
