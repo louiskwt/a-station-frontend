@@ -18,6 +18,8 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex }) {
+	// state
+	const [loading, setLoading] = useState(false);
 	return (
 		<Layout title={ex.title}>
 			<Container>
