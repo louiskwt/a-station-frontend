@@ -1,11 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 import { useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
 
 export default function AnswerPanel({ questions, answers }) {
+	// Spinner state
+	const [loading, setLoading] = useState(false);
+
 	// react hooks
 	const [attempt, setAttempt] = useState(false);
 	const [scoringData, setScoringData] = useState([]);
@@ -35,9 +39,11 @@ export default function AnswerPanel({ questions, answers }) {
 					answered = true;
 				}
 				if (answered === false) {
+					setLoading(false);
 					toast.error('請先回答所有問題', {
 						position: 'top-center'
 					});
+
 					return;
 				}
 			}
@@ -47,6 +53,13 @@ export default function AnswerPanel({ questions, answers }) {
 		btnEl.current.disabled = 'true';
 
 		setAttempt(true);
+	};
+
+	const handleClick = () => {
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+		}, 1000);
 	};
 
 	return (
@@ -73,8 +86,24 @@ export default function AnswerPanel({ questions, answers }) {
 					</Form.Group>
 				))}
 
-				<Button variant='success' type='submit' ref={btnEl}>
-					Submit
+				<Button
+					variant='success'
+					type='submit'
+					ref={btnEl}
+					onClick={handleClick}
+				>
+					{loading ? (
+						<Spinner
+							as='span'
+							animation='border'
+							size='sm'
+							role='status'
+							aria-hidden='true'
+							variant='light'
+						/>
+					) : (
+						'Submit'
+					)}
 				</Button>
 				{attempt ? <Score scoringData={scoringData} /> : ''}
 			</Form>

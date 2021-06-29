@@ -1,8 +1,12 @@
 import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner';
 import styles from '@/styles/ExerciseCard.module.css';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function ExerciseCard({ exercise }) {
+	const [loading, setLoading] = useState(false);
+
 	return (
 		<>
 			<Card className='mt-4'>
@@ -22,7 +26,23 @@ export default function ExerciseCard({ exercise }) {
 						{exercise.description}
 					</Card.Text>
 					<Link href={`/${exercise.type}/${exercise.slug}`}>
-						<a className='btn btn-primary'>做練習</a>
+						<a
+							className='btn btn-primary'
+							onClick={() => setLoading(true)}
+						>
+							{loading ? (
+								<Spinner
+									as='span'
+									animation='border'
+									size='sm'
+									role='status'
+									aria-hidden='true'
+									variant='light'
+								/>
+							) : (
+								'做練習'
+							)}
+						</a>
 					</Link>
 				</Card.Body>
 			</Card>
