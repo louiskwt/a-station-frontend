@@ -12,6 +12,7 @@ export default function AnswerPanel({ questions, answers }) {
 
 	// react hooks
 	const [attempt, setAttempt] = useState(false);
+	const [answered, setAnswered] = useState(false);
 	const [scoringData, setScoringData] = useState([]);
 	const btnEl = useRef(null);
 	// exercise variable
@@ -29,26 +30,29 @@ export default function AnswerPanel({ questions, answers }) {
 			const target = `e.target.q${i + 1}`;
 			target = eval(target);
 			const optionArr = Array.from(target);
-			let answered = false;
-			for (let j = 0; j < optionArr.length; j++) {
+
+			const optionLength = optionArr.length;
+			setAnswered(false);
+
+			for (let j = 0; j < optionLength; j++) {
 				if (optionArr[j].checked === true) {
 					scoringArr.push({
 						response: optionArr[j].id,
 						answer: ans[i]
 					});
-					answered = true;
-				}
-				if (answered === false) {
-					setLoading(false);
-					toast.error('請先回答所有問題', {
-						position: 'top-center'
-					});
-
-					return;
+					setAnswered(true);
 				}
 			}
 		}
+
 		setScoringData(scoringArr);
+
+		if (scoringArr.length < total) {
+			toast.error('請先回答所有問題', {
+				position: 'top-center'
+			});
+			return;
+		}
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 
