@@ -8,8 +8,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
 
-export default function SAPanel({ questions, answers }) {
-	// React Hooks
+export default function SAPanel({ questions, answers, startingTime }) {
+	// Timer states
+	const [finishingTime, setFinishingTime] = useState();
+	console.log(startingTime);
+	// React States for scoring
 	const [attempt, setAttempt] = useState(false);
 	const [scoringData, setScoringData] = useState([]);
 	// Spinner State
@@ -40,6 +43,9 @@ export default function SAPanel({ questions, answers }) {
 		}
 
 		setScoringData(scoringArr);
+		let t = Date.now();
+		t = t - startingTime;
+		setFinishingTime(t);
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 
@@ -95,7 +101,12 @@ export default function SAPanel({ questions, answers }) {
 					)}
 				</Button>
 
-				{attempt && <Score scoringData={scoringData} />}
+				{attempt && (
+					<Score
+						scoringData={scoringData}
+						finishingTime={finishingTime}
+					/>
+				)}
 			</Form>
 		</div>
 	);

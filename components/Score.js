@@ -1,9 +1,12 @@
+import Badge from 'react-bootstrap/Badge';
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useEffect, useState } from 'react';
 
-export default function Score({ scoringData }) {
+export default function Score({ scoringData, finishingTime }) {
 	const total = scoringData.length;
+
+	console.log(finishingTime);
 
 	const calculatingPoint = (scoringData) => {
 		let point = 0;
@@ -32,6 +35,15 @@ export default function Score({ scoringData }) {
 		};
 	});
 
+	function millisToMinAndSeconds(millis) {
+		const minutes = Math.floor(millis / 60000);
+		const seconds = ((millis % 60000) / 1000).toFixed(0);
+
+		return `${minutes < 10 ? '0' : ''}${minutes} : ${
+			seconds < 10 ? '0' : ''
+		}${seconds}`;
+	}
+
 	return (
 		<div>
 			{/* Score */}
@@ -39,6 +51,13 @@ export default function Score({ scoringData }) {
 				<h4>
 					Score : {score} / {total}
 				</h4>
+				{/* Time Spent */}
+				<h4 className='mt-3'>完成時間 </h4>
+				<h3 className='mt-3'>
+					<Badge variant='secondary'>
+						{millisToMinAndSeconds(finishingTime)}
+					</Badge>
+				</h3>
 				<br />
 				<br />
 				<ProgressBar

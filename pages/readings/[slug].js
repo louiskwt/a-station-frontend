@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Passage from '@/components/Passage';
 import MCPanel from '@/components/MCPanel';
 import SAPanel from '@/components/SAPanel';
+import { useEffect, useState } from 'react';
 
 export async function getServerSideProps({ query: { slug } }) {
 	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
@@ -20,6 +21,12 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex }) {
+	// State for Timer
+	const [startingTime, setStartingTime] = useState();
+
+	useEffect(() => setStartingTime(Date.now()), []);
+
+	console.log(startingTime);
 	return (
 		<Layout title={ex.title}>
 			<Container>
@@ -39,9 +46,17 @@ export default function ReadingExPage({ ex }) {
 
 				<br />
 				{ex.mc ? (
-					<MCPanel questions={ex.questions} answers={ex.answers} />
+					<MCPanel
+						questions={ex.questions}
+						answers={ex.answers}
+						startingTime={startingTime}
+					/>
 				) : (
-					<SAPanel questions={ex.questions} answers={ex.answers} />
+					<SAPanel
+						questions={ex.questions}
+						answers={ex.answers}
+						startingTime={startingTime}
+					/>
 				)}
 			</Container>
 			<br></br>
