@@ -8,8 +8,8 @@ import ExerciseCard from '@/components/ExerciseCard';
 // Fetching data
 export async function getServerSideProps() {
 	const [readingsRes, writingsRes] = await Promise.all([
-		fetch(`${API_URL}/readings?_sort=date:ASC`),
-		fetch(`${API_URL}/writings?_sort=date:ASC`)
+		fetch(`${API_URL}/readings?_sort=date:DESC&_limit=3`),
+		fetch(`${API_URL}/writings?_sort=date:DESC&_limit=3`)
 	]);
 	const [readings, writings] = await Promise.all([
 		readingsRes.json(),
