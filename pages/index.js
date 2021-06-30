@@ -7,38 +7,51 @@ import ExerciseCard from '@/components/ExerciseCard';
 
 // Fetching data
 export async function getServerSideProps() {
-	const [readingsRes, writingsRes] = await Promise.all([
-		fetch(`${API_URL}/readings?_sort=date:DESC&_limit=3`),
-		fetch(`${API_URL}/writings?_sort=date:DESC&_limit=3`)
-	]);
-	const [readings, writings] = await Promise.all([
-		readingsRes.json(),
-		writingsRes.json()
-	]);
-
-	return {
-		props: { readings, writings }
-	};
+	try {
+		const [readingsRes, writingsRes] = await Promise.all([
+			fetch(`${API_URL}/reading?_sort=date:DESC&_limit=3`),
+			fetch(`${API_URL}/writing?_sort=date:DESC&_limit=3`)
+		]);
+		const [readings, writings] = await Promise.all([
+			readingsRes.json(),
+			writingsRes.json()
+		]);
+		return {
+			props: { readings, writings }
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			props: {}
+		};
+	}
 }
 
 export default function HomePage({ readings, writings }) {
 	return (
 		<Layout>
 			<h2 className='mt-5'>最新Reading練習</h2>
-			{readings.length === 0 && (
-				<h3>Oh! No reading exercise for today. You can take a break</h3>
+			{!readings ? (
+				<h3 className='mt-5'>
+					Oh! No reading exercise for today. You can take a break
+				</h3>
+			) : (
+				readings.map((exercise) => (
+					<ExerciseCard exercise={exercise} key={exercise.id} />
+				))
 			)}
-			{readings.map((exercise) => (
-				<ExerciseCard exercise={exercise} key={exercise.id} />
-			))}
+
 			<hr />
 			<h2>最新Writing練習</h2>
-			{writings.length === 0 && (
-				<h3>Oh! No writing exercise for today. You can take a break</h3>
+			{!readings ? (
+				<h3 className='mt-5'>
+					Oh! No writing exercise for today. You can take a break
+				</h3>
+			) : (
+				writings.map((exercise) => (
+					<ExerciseCard exercise={exercise} key={exercise.id} />
+				))
 			)}
-			{writings.map((exercise) => (
-				<ExerciseCard exercise={exercise} key={exercise.id} />
-			))}
 
 			<hr />
 			{/* About Section */}
