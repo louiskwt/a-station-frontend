@@ -11,7 +11,7 @@ import Score from './Score';
 export default function SAPanel({ questions, answers, startingTime }) {
 	// Timer states
 	const [finishingTime, setFinishingTime] = useState();
-	console.log(startingTime);
+
 	// React States for scoring
 	const [attempt, setAttempt] = useState(false);
 	const [scoringData, setScoringData] = useState([]);

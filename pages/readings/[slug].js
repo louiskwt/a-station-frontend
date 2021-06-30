@@ -26,7 +26,6 @@ export default function ReadingExPage({ ex }) {
 
 	useEffect(() => setStartingTime(Date.now()), []);
 
-	console.log(startingTime);
 	return (
 		<Layout title={ex.title}>
 			<Container>

@@ -23,8 +23,7 @@ export default function WritingExPage({ ex }) {
 	const [startingTime, setStartingTime] = useState();
 
 	useEffect(() => setStartingTime(Date.now()), []);
-	// state
-	const [loading, setLoading] = useState(false);
+
 	return (
 		<Layout title={ex.title}>
 			<Container>
