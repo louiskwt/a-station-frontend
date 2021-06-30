@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 export default function Score({ scoringData, finishingTime }) {
 	const total = scoringData.length;
 
-	console.log(finishingTime);
-
 	const calculatingPoint = (scoringData) => {
 		let point = 0;
 		scoringData.map((data) => {
@@ -35,14 +33,15 @@ export default function Score({ scoringData, finishingTime }) {
 		};
 	});
 
-	function millisToMinAndSeconds(millis) {
+	// Timer function
+	const millisToMinAndSeconds = (millis) => {
 		const minutes = Math.floor(millis / 60000);
 		const seconds = ((millis % 60000) / 1000).toFixed(0);
 
 		return `${minutes < 10 ? '0' : ''}${minutes} : ${
 			seconds < 10 ? '0' : ''
 		}${seconds}`;
-	}
+	};
 
 	return (
 		<div>
