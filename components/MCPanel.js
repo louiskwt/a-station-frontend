@@ -6,7 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
 
-export default function AnswerPanel({ questions, answers }) {
+export default function AnswerPanel({ questions, answers, startingTime }) {
+	// Timer State
+	const [finishingTime, setFinishingTime] = useState();
+
 	// Spinner state
 	const [loading, setLoading] = useState(false);
 
@@ -55,6 +58,10 @@ export default function AnswerPanel({ questions, answers }) {
 		}
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
+
+		let t = Date.now();
+		t = t - startingTime;
+		setFinishingTime(t);
 
 		setAttempt(true);
 	};
@@ -109,7 +116,14 @@ export default function AnswerPanel({ questions, answers }) {
 						'Submit'
 					)}
 				</Button>
-				{attempt ? <Score scoringData={scoringData} /> : ''}
+				{attempt ? (
+					<Score
+						scoringData={scoringData}
+						finishingTime={finishingTime}
+					/>
+				) : (
+					''
+				)}
 			</Form>
 		</div>
 	);

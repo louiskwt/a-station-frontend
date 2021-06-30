@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { API_URL } from '@/config/index';
 import Link from 'next/link';
@@ -18,6 +19,10 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex }) {
+	// State for Timer
+	const [startingTime, setStartingTime] = useState();
+
+	useEffect(() => setStartingTime(Date.now()), []);
 	// state
 	const [loading, setLoading] = useState(false);
 	return (
@@ -36,9 +41,13 @@ export default function WritingExPage({ ex }) {
 				</div>
 				<br />
 				{ex.mc ? (
-					<MCPanel questions={ex.questions} answers={ex.answers} />
+					<MCPanel
+						questions={ex.questions}
+						answers={ex.answers}
+						startingTime={startingTime}
+					/>
 				) : (
-					<SAPanel answers={ex.answers} />
+					<SAPanel answers={ex.answers} startingTime={startingTime} />
 				)}
 			</Container>
 			<br />
