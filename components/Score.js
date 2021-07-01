@@ -10,8 +10,17 @@ export default function Score({ scoringData, finishingTime }) {
 	const calculatingPoint = (scoringData) => {
 		let point = 0;
 		scoringData.map((data) => {
-			if (data.response === data.answer) {
-				point += 1;
+			if (data.answer.includes('/')) {
+				const alterAnswer = data.answer.split('/');
+				for (let i = 0; i < alterAnswer.length; i++) {
+					if (data.response === alterAnswer[i]) {
+						point += 1;
+					}
+				}
+			} else {
+				if (data.response === data.answer) {
+					point += 1;
+				}
 			}
 		});
 		return point;
@@ -80,7 +89,7 @@ export default function Score({ scoringData, finishingTime }) {
 					{scoringData.map((data, index) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
-							{data.response === data.answer ? (
+							{data.answer.includes(data.response) ? (
 								<td className='text-success'>
 									{data.response} <FaCheck />
 								</td>
