@@ -56,12 +56,14 @@ export default function ReadingPage({ readings, page, total }) {
 			</Container>
 			<br />
 
-			<PaginationList
-				total={total}
-				PER_PAGE={PER_PAGE}
-				page={page}
-				type={type}
-			/>
+			{total > PER_PAGE && (
+				<PaginationList
+					total={total}
+					PER_PAGE={PER_PAGE}
+					page={page}
+					type={type}
+				/>
+			)}
 		</Layout>
 	);
 }
