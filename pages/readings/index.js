@@ -1,12 +1,11 @@
 import Layout from '@/components/Layout';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '@/components/Filter';
 import ExerciseCard from '@/components/ExerciseCard';
 import { API_URL } from '@/config/index';
-import Link from 'next/link';
+import PaginationList from '@/components/PaginationList';
 const PER_PAGE = 3;
 
 export async function getServerSideProps({ query: { page = 1 } }) {
@@ -31,7 +30,6 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
 export default function ReadingPage({ readings, page, total }) {
 	// pagination
-	const lastPage = Math.ceil(total / PER_PAGE);
 
 	const tags = ['opposite meaning', 'similar meaning', 'T/F/NG'];
 	const type = 'readings';
@@ -57,19 +55,13 @@ export default function ReadingPage({ readings, page, total }) {
 				))}
 			</Container>
 			<br />
-			<br />
 
-			{page > 1 && (
-				<Link href={`/readings?page=${page - 1}`}>
-					<Button variant='light'>Prev</Button>
-				</Link>
-			)}
-
-			{page < lastPage && (
-				<Link href={`/readings?page=${page + 1}`}>
-					<Button variant='light'>Next</Button>
-				</Link>
-			)}
+			<PaginationList
+				total={total}
+				PER_PAGE={PER_PAGE}
+				page={page}
+				type={type}
+			/>
 		</Layout>
 	);
 }
