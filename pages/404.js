@@ -26,8 +26,8 @@ export default function NotFoundPage() {
 			<div className='container text-center'>
 				<h1 className='mt-5'>
 					{' '}
-					<FaExclamationTriangle></FaExclamationTriangle>{' '}
-					抱兼～找不到你要到訪的頁面
+					<FaExclamationTriangle></FaExclamationTriangle> 抱兼～
+					暫時無法訪問該頁面
 				</h1>
 				<h4>{second} 秒之後會將跳轉回主頁</h4>
 				<Button className='mt-5' variant='secondary'>

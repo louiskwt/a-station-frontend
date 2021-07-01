@@ -10,14 +10,21 @@ import SAPanel from '@/components/SAPanel';
 import { useEffect, useState } from 'react';
 
 export async function getServerSideProps({ query: { slug } }) {
-	const res = await fetch(`${API_URL}/readings?slug=${slug}`);
-	const ex = await res.json();
+	try {
+		const res = await fetch(`${API_URL}/readings?slug=${slug}`);
+		const ex = await res.json();
 
-	return {
-		props: {
-			ex: ex[0]
-		}
-	};
+		return {
+			props: {
+				ex: ex[0]
+			}
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			notFound: true
+		};
+	}
 }
 
 export default function ReadingExPage({ ex }) {

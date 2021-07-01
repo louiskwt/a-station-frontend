@@ -9,13 +9,20 @@ import SAPanel from '@/components/SAPanel';
 import MCPanel from '@/components/MCPanel';
 
 export async function getServerSideProps({ query: { slug } }) {
-	const res = await fetch(`${API_URL}/writings?slug=${slug}`);
-	const ex = await res.json();
-	return {
-		props: {
-			ex: ex[0]
-		}
-	};
+	try {
+		const res = await fetch(`${API_URL}/writings?slug=${slug}`);
+		const ex = await res.json();
+		return {
+			props: {
+				ex: ex[0]
+			}
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			notFound: true
+		};
+	}
 }
 
 export default function WritingExPage({ ex }) {

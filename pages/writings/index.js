@@ -12,19 +12,26 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 	// Calculate start page
 	const start = +page === 1 ? 0 : (+page - 1) * 3;
 
-	const totalRes = await fetch(`${API_URL}/writings/count`);
+	try {
+		const totalRes = await fetch(`${API_URL}/writings/count`);
 
-	const total = await totalRes.json();
-	// Fetch Exercises
-	const exerciseRes = await fetch(
-		`${API_URL}/writings?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
-	);
+		const total = await totalRes.json();
+		// Fetch Exercises
+		const exerciseRes = await fetch(
+			`${API_URL}/writings?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+		);
 
-	const writings = await exerciseRes.json();
+		const writings = await exerciseRes.json();
 
-	return {
-		props: { writings, page: +page, total }
-	};
+		return {
+			props: { writings, page: +page, total }
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			notFound: true
+		};
+	}
 }
 
 export default function writing({ writings, page, total }) {
