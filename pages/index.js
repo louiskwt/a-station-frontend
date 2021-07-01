@@ -32,9 +32,7 @@ export default function HomePage({ readings, writings }) {
 		<Layout>
 			<h2 className='mt-5'>最新Reading練習</h2>
 			{!readings ? (
-				<h3 className='mt-5'>
-					Oh! No reading exercise for today. You can take a break
-				</h3>
+				<h3 className='mt-5'>抱歉，新的練習還沒進站，請稍等......</h3>
 			) : (
 				readings.map((exercise) => (
 					<ExerciseCard exercise={exercise} key={exercise.id} />
@@ -44,9 +42,7 @@ export default function HomePage({ readings, writings }) {
 			<hr />
 			<h2>最新Writing練習</h2>
 			{!readings ? (
-				<h3 className='mt-5'>
-					Oh! No writing exercise for today. You can take a break
-				</h3>
+				<h3 className='mt-5'>抱歉，新的練習還沒進站，請稍等......</h3>
 			) : (
 				writings.map((exercise) => (
 					<ExerciseCard exercise={exercise} key={exercise.id} />
