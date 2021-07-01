@@ -9,8 +9,8 @@ import ExerciseCard from '@/components/ExerciseCard';
 export async function getServerSideProps() {
 	try {
 		const [readingsRes, writingsRes] = await Promise.all([
-			fetch(`${API_URL}/reading?_sort=date:DESC&_limit=3`),
-			fetch(`${API_URL}/writing?_sort=date:DESC&_limit=3`)
+			fetch(`${API_URL}/readings?_sort=date:DESC&_limit=3`),
+			fetch(`${API_URL}/writings?_sort=date:DESC&_limit=3`)
 		]);
 		const [readings, writings] = await Promise.all([
 			readingsRes.json(),
