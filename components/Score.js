@@ -1,6 +1,7 @@
 import Badge from 'react-bootstrap/Badge';
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
 export default function Score({ scoringData, finishingTime }) {
@@ -38,9 +39,9 @@ export default function Score({ scoringData, finishingTime }) {
 		const minutes = Math.floor(millis / 60000);
 		const seconds = ((millis % 60000) / 1000).toFixed(0);
 
-		return `${minutes < 10 ? '0' : ''}${minutes} : ${
+		return `${minutes < 10 ? '0' : ''}${minutes} m : ${
 			seconds < 10 ? '0' : ''
-		}${seconds}`;
+		}${seconds} s`;
 	};
 
 	return (
@@ -79,7 +80,16 @@ export default function Score({ scoringData, finishingTime }) {
 					{scoringData.map((data, index) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
-							<td>{data.response}</td>
+							{data.response === data.answer ? (
+								<td className='text-success'>
+									{data.response} <FaCheck />
+								</td>
+							) : (
+								<td className='text-danger'>
+									{data.response} <FaTimes />
+								</td>
+							)}
+
 							<td>{data.answer}</td>
 						</tr>
 					))}
