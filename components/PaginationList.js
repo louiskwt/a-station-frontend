@@ -3,8 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 export default function PaginationList({ total, PER_PAGE, page, type }) {
-	// console.log(PER_PAGE);
-	// console.log(total);
+	console.log(PER_PAGE);
+	console.log(total);
 
 	const totalPage = Math.ceil(total / PER_PAGE);
 
