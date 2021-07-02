@@ -13,11 +13,11 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 	// Spinner state
 	const [loading, setLoading] = useState(false);
 
-	// react hooks
+	// react state for exercise
 	const [attempt, setAttempt] = useState(false);
-	const [answered, setAnswered] = useState(false);
 	const [scoringData, setScoringData] = useState([]);
 	const btnEl = useRef(null);
+
 	// exercise variable
 	const ans = answers.answers;
 	const questionData = questions.questions;
@@ -35,7 +35,6 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			const optionArr = Array.from(target);
 
 			const optionLength = optionArr.length;
-			setAnswered(false);
 
 			for (let j = 0; j < optionLength; j++) {
 				if (optionArr[j].checked === true) {
@@ -43,7 +42,6 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 						response: optionArr[j].id,
 						answer: ans[i]
 					});
-					setAnswered(true);
 				}
 			}
 		}
@@ -59,6 +57,7 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 
+		// Handling time spent
 		let t = Date.now();
 		t = t - startingTime;
 		setFinishingTime(t);
