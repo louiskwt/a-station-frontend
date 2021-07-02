@@ -20,8 +20,37 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 
 	// exercise variable
 	const ans = answers.answers;
-	const questionData = questions.questions;
+	// const questionData = questions.questions;
+	let questionArr = [];
 	const instruction = questions.instruction;
+
+	// Shuffling the MC options with Fisher-Yates (aka Kunth) Shuffle
+	function shuffleArray(arr) {
+		let currentIndex = arr.length,
+			randomIndex;
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+			// Pick a remaining element within the range of the arr
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+
+			// Swap it with the current element
+			[arr[currentIndex], arr[randomIndex]] = [
+				arr[randomIndex],
+				arr[currentIndex]
+			];
+		}
+		return arr;
+	}
+
+	questions.questions.map((question) => {
+		let questionObj = {
+			question: question.question
+		};
+		const shuffledOpt = shuffleArray(question.options);
+		questionObj.options = shuffledOpt;
+		questionArr.push(questionObj);
+	});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -77,7 +106,7 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			<ToastContainer />
 			<Form onSubmit={handleSubmit}>
 				<h5>{instruction}</h5>
-				{questionData.map((data, index) => (
+				{questionArr.map((data, index) => (
 					<Form.Group key={data.question}>
 						<Form.Label>
 							Q{index + 1}: {data.question}
