@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 	// State
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState({ type: 'guest', membership: 'Free' });
 	const [message, setMessage] = useState(null);
 	const [status, setStatus] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
 		if (res.ok) {
 			setUser(data.user);
 		} else {
-			setUser(null);
+			setUser({ type: 'guest', membership: 'Free' });
 		}
 	};
 

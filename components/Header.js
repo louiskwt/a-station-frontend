@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Header() {
 	const { user, logout, status, message } = useContext(AuthContext);
 	const router = useRouter();
+
 	// Strapi Error Handling
 	useEffect(() => {
 		if (status !== 'success' && message && router.pathname !== '/') {
@@ -48,7 +49,7 @@ export default function Header() {
 						</Link>
 					</Nav>
 					<Nav>
-						{user ? (
+						{user && user.type !== 'guest' ? (
 							// If logged in
 							<>
 								<Link href='/dashboard'>
