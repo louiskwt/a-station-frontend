@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
@@ -21,7 +21,6 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 	// exercise variable
 	const ans = answers.answers;
 	// const questionData = questions.questions;
-	let questionArr = [];
 	const instruction = questions.instruction;
 
 	// Shuffling the MC options with Fisher-Yates (aka Kunth) Shuffle
@@ -43,14 +42,20 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 		return arr;
 	}
 
-	questions.questions.map((question) => {
-		let questionObj = {
-			question: question.question
-		};
-		const shuffledOpt = shuffleArray(question.options);
-		questionObj.options = shuffledOpt;
-		questionArr.push(questionObj);
-	});
+	const [questionArr, setQuestionArr] = useState(null);
+
+	useEffect(() => {
+		let arr = [];
+		questions.questions.map((question) => {
+			let questionObj = {
+				question: question.question
+			};
+			const shuffledOpt = shuffleArray(question.options);
+			questionObj.options = shuffledOpt;
+			arr.push(questionObj);
+		});
+		setQuestionArr(arr);
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -106,24 +111,25 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			<ToastContainer />
 			<Form onSubmit={handleSubmit}>
 				<h5>{instruction}</h5>
-				{questionArr.map((data, index) => (
-					<Form.Group key={data.question}>
-						<Form.Label>
-							Q{index + 1}: {data.question}
-						</Form.Label>
-						<br />
-						{data.options.map((option) => (
-							<Form.Check
-								inline
-								name={`q${index + 1}`}
-								type='radio'
-								label={option}
-								key={option}
-								id={option}
-							/>
-						))}
-					</Form.Group>
-				))}
+				{questionArr &&
+					questionArr.map((data, index) => (
+						<Form.Group key={data.question}>
+							<Form.Label>
+								Q{index + 1}: {data.question}
+							</Form.Label>
+							<br />
+							{data.options.map((option) => (
+								<Form.Check
+									inline
+									name={`q${index + 1}`}
+									type='radio'
+									label={option}
+									key={option}
+									id={option}
+								/>
+							))}
+						</Form.Group>
+					))}
 
 				<Button
 					variant='success'
