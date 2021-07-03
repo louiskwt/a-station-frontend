@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
 			setMessage(null);
 			setTimeout(() => {
 				router.push('/');
-				setUser(null);
+				setUser({ type: 'guest', membership: 'Free' });
 				setStatus(null);
 			}, 500);
 		}
