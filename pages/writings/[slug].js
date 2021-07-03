@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import Layout from '../../components/Layout';
+import Layout from '@/components/Layout';
 import { API_URL } from '@/config/index';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
