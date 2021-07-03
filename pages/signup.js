@@ -17,9 +17,18 @@ export default function SignUpPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [submitted, setSubmitted] = useState(false);
+
+	function validateEmail(email) {
+		const re =
+			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+		return re.test(email.toLowerCase());
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setSubmitted(true);
 		setLoading(true);
 		if (
 			username === '' ||
@@ -57,6 +66,8 @@ export default function SignUpPage() {
 							name='username'
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
+							isInvalid={username === '' && submitted}
+							isValid={username.length > 0}
 						/>
 					</Form.Group>
 					<Form.Group className='mt-4'>
@@ -68,6 +79,8 @@ export default function SignUpPage() {
 							name='email'
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							isInvalid={email === '' && submitted}
+							isValid={validateEmail(email)}
 						/>
 						<Form.Text className='text-muted'>
 							放心，我們跟你一樣很著重個人私隱，所以我們承諾不會把你的email分享給其他人
@@ -83,9 +96,13 @@ export default function SignUpPage() {
 							name='password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
+							isValid={password.length >= 6}
+							isInvalid={
+								password.length < 6 && password.length !== 0
+							}
 						/>
 						<Form.Text className='text-muted'>
-							密碼要是6個字以上，需要包括數字和英文字母
+							密碼要求是6個字以上
 						</Form.Text>
 					</Form.Group>
 
@@ -98,6 +115,13 @@ export default function SignUpPage() {
 							name='confirmPassword'
 							value={confirmPassword}
 							onChange={(e) => setConfirmPassword(e.target.value)}
+							isValid={
+								confirmPassword === password &&
+								password.length > 0
+							}
+							isInvalid={
+								confirmPassword !== password && submitted
+							}
 						/>
 					</Form.Group>
 
