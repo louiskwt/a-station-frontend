@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	// Check if user is logged in (presisting user)
-	const checkUserLoggedIn = async (user) => {
+	const checkUserLoggedIn = async () => {
 		const res = await fetch(`${NEXT_URL}/api/user`);
 		const data = await res.json();
 
@@ -109,6 +109,13 @@ export const AuthProvider = ({ children }) => {
 			setUser(data.user);
 		} else {
 			setUser({ type: 'guest', membership: 'Free' });
+		}
+	};
+
+	// Authenticate membership type
+	const checkMembership = async (user) => {
+		if (user.membership !== 'VIP') {
+			router.push('/404');
 		}
 	};
 
@@ -122,7 +129,8 @@ export const AuthProvider = ({ children }) => {
 				logout,
 				status,
 				loading,
-				setLoading
+				setLoading,
+				checkMembership
 			}}
 		>
 			{children}
