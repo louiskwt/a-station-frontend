@@ -32,22 +32,11 @@ export default function ExerciseCard({ exercise }) {
 								className='btn btn-primary disabled'
 								onClick={() => setLoading(true)}
 							>
-								{loading ? (
-									<Spinner
-										as='span'
-										animation='border'
-										size='sm'
-										role='status'
-										aria-hidden='true'
-										variant='light'
-									/>
-								) : (
-									'只限VIP'
-								)}
+								只限 VIP
 							</a>
 						</Link>
 					)}
-					{user && user.membership === 'VIP' && (
+					{exercise.premium && user && user.membership === 'VIP' && (
 						<Link href={`/${exercise.type}/${exercise.slug}`}>
 							<a
 								className='btn btn-primary'
@@ -68,7 +57,7 @@ export default function ExerciseCard({ exercise }) {
 							</a>
 						</Link>
 					)}
-					{!exercise.premium && user.membership !== 'VIP' && (
+					{!exercise.premium && (
 						<Link href={`/${exercise.type}/${exercise.slug}`}>
 							<a
 								className='btn btn-primary'
