@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
+import { shuffleArray } from '@/helper/shuffle';
 
 export default function AnswerPanel({ questions, answers, startingTime }) {
 	// Timer State
@@ -20,28 +21,7 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 
 	// exercise variable
 	const ans = answers.answers;
-	// const questionData = questions.questions;
 	const instruction = questions.instruction;
-
-	// Shuffling the MC options with Fisher-Yates (aka Kunth) Shuffle
-	function shuffleArray(arr) {
-		let currentIndex = arr.length,
-			randomIndex;
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-			// Pick a remaining element within the range of the arr
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex--;
-
-			// Swap it with the current element
-			[arr[currentIndex], arr[randomIndex]] = [
-				arr[randomIndex],
-				arr[currentIndex]
-			];
-		}
-		return arr;
-	}
-
 	const [questionArr, setQuestionArr] = useState(null);
 
 	useEffect(() => {
@@ -79,7 +59,6 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 				}
 			}
 		}
-
 		setScoringData(scoringArr);
 
 		if (scoringArr.length < total) {
@@ -92,10 +71,8 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 		btnEl.current.disabled = 'true';
 
 		// Handling time spent
-		let t = Date.now();
-		t = t - startingTime;
+		let t = Date.now() - startingTime;
 		setFinishingTime(t);
-
 		setAttempt(true);
 	};
 
