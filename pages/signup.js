@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '@/context/AuthContext';
 import { useState, useContext } from 'react';
-import { validateEmail } from '@/helper/index';
+import { validateEmail } from '@/helper/validate';
 
 export default function SignUpPage() {
 	// ContextAPI functions and state
