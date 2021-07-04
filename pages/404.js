@@ -8,7 +8,7 @@ import AuthContext from '@/context/AuthContext';
 export default function NotFoundPage() {
 	const router = useRouter();
 
-	const { text, setText } = useContext(AuthContext);
+	const { text } = useContext(AuthContext);
 
 	const [second, setSecond] = useState(3);
 	useEffect(() => {
