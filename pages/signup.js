@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '@/context/AuthContext';
 import { useState, useContext } from 'react';
+import { validateEmail } from '@/helper/index';
 
 export default function SignUpPage() {
 	// ContextAPI functions and state
@@ -18,13 +19,6 @@ export default function SignUpPage() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [submitted, setSubmitted] = useState(false);
-
-	function validateEmail(email) {
-		const re =
-			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-		return re.test(email.toLowerCase());
-	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -51,6 +45,7 @@ export default function SignUpPage() {
 		}
 		register({ username, email, password });
 	};
+
 	return (
 		<Layout>
 			<ToastContainer />
@@ -79,7 +74,10 @@ export default function SignUpPage() {
 							name='email'
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							isInvalid={email === '' && submitted}
+							isInvalid={
+								(email === '' && submitted) ||
+								(email.length > 0 && !validateEmail(email))
+							}
 							isValid={validateEmail(email)}
 						/>
 						<Form.Text className='text-muted'>
