@@ -3,20 +3,16 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Score from './Score';
 import ScoreContext from '@/context/ScoreContext';
 import { useRouter } from 'next/router';
 
 export default function SAPanel({ questions, answers, startingTime }) {
 	const router = useRouter();
-
 	// Timer states
 	const { setFinishingTime, setScoringData } = useContext(ScoreContext);
-
-	// React States for scoring
 
 	// Spinner State
 	const [loading, setLoading] = useState(false);
@@ -49,8 +45,7 @@ export default function SAPanel({ questions, answers, startingTime }) {
 		let t = Date.now();
 		t = t - startingTime;
 		setFinishingTime(t);
-		btnEl.current.blur();
-		btnEl.current.disabled = 'true';
+		btnEl.current.blur().disabled = 'true';
 		router.push('/score');
 	};
 

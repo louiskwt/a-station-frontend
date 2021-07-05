@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import 'react-toastify/dist/ReactToastify.css';
-import Score from './Score';
 import { useState, useEffect, useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { shuffleArray } from '@/helper/shuffle';
@@ -67,8 +66,7 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			});
 			return;
 		}
-		btnEl.current.blur();
-		btnEl.current.disabled = 'true';
+		btnEl.current.blur().disabled = 'true';
 
 		// Handling time spent
 		let t = Date.now() - startingTime;
