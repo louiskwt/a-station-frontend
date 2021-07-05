@@ -45,7 +45,8 @@ export default function SAPanel({ questions, answers, startingTime }) {
 		let t = Date.now();
 		t = t - startingTime;
 		setFinishingTime(t);
-		btnEl.current.blur().disabled = 'true';
+		btnEl.current.blur();
+		btnEl.current.disabled = 'true';
 		router.push('/score');
 	};
 

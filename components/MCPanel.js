@@ -66,8 +66,8 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			});
 			return;
 		}
-		btnEl.current.blur().disabled = 'true';
-
+		btnEl.current.blur();
+		btnEl.current.disabled = 'true';
 		// Handling time spent
 		let t = Date.now() - startingTime;
 		setFinishingTime(t);
