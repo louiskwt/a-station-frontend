@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useEffect, useRef } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
+import { useState, useEffect, useRef } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { shuffleArray } from '@/helper/shuffle';
 
 export default function AnswerPanel({ questions, answers, startingTime }) {
