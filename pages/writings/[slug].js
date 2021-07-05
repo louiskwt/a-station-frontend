@@ -15,7 +15,8 @@ export async function getServerSideProps({ query: { slug } }) {
 		const ex = await res.json();
 		return {
 			props: {
-				ex: ex[0]
+				ex: ex[0],
+				slug
 			}
 		};
 	} catch (error) {
@@ -26,7 +27,7 @@ export async function getServerSideProps({ query: { slug } }) {
 	}
 }
 
-export default function WritingExPage({ ex }) {
+export default function WritingExPage({ ex, slug }) {
 	// State for Timer
 	const [startingTime, setStartingTime] = useState();
 
@@ -64,11 +65,13 @@ export default function WritingExPage({ ex }) {
 								questions={ex.questions}
 								answers={ex.answers}
 								startingTime={startingTime}
+								slug={slug}
 							/>
 						) : (
 							<SAPanel
 								answers={ex.answers}
 								startingTime={startingTime}
+								slug={slug}
 							/>
 						)}
 					</Container>

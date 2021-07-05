@@ -12,6 +12,8 @@ export const ScoreProvider = ({ children }) => {
 
 	const [scoringData, setScoringData] = useState();
 
+	const [title, setTitle] = useState();
+
 	// Router
 	const router = useRouter();
 
@@ -23,7 +25,9 @@ export const ScoreProvider = ({ children }) => {
 				setFinishingTime,
 				scoringData,
 				setScoringData,
-				finishingTime
+				finishingTime,
+				title,
+				setTitle
 			}}
 		>
 			{children}

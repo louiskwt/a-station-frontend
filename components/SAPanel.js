@@ -9,10 +9,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import ScoreContext from '@/context/ScoreContext';
 import { useRouter } from 'next/router';
 
-export default function SAPanel({ questions, answers, startingTime }) {
+export default function SAPanel({ questions, answers, startingTime, slug }) {
 	const router = useRouter();
 	// Timer states
-	const { setFinishingTime, setScoringData } = useContext(ScoreContext);
+	const { setFinishingTime, setScoringData, setTitle } =
+		useContext(ScoreContext);
 
 	// Spinner State
 	const [loading, setLoading] = useState(false);
@@ -42,12 +43,13 @@ export default function SAPanel({ questions, answers, startingTime }) {
 		}
 
 		setScoringData(scoringArr);
+		setTitle(slug);
 		let t = Date.now();
 		t = t - startingTime;
 		setFinishingTime(t);
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
-		router.push('/score');
+		router.push(`/score`);
 	};
 
 	const handleClick = () => {

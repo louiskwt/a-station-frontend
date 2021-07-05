@@ -8,10 +8,16 @@ import { shuffleArray } from '@/helper/shuffle';
 import { useRouter } from 'next/router';
 import ScoreContext from '@/context/ScoreContext';
 
-export default function AnswerPanel({ questions, answers, startingTime }) {
+export default function AnswerPanel({
+	questions,
+	answers,
+	startingTime,
+	slug
+}) {
 	const router = useRouter();
 
-	const { setFinishingTime, setScoringData } = useContext(ScoreContext);
+	const { setFinishingTime, setScoringData, setTitle } =
+		useContext(ScoreContext);
 	// Spinner state
 	const [loading, setLoading] = useState(false);
 
@@ -59,6 +65,7 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 			}
 		}
 		setScoringData(scoringArr);
+		setTitle(slug);
 
 		if (scoringArr.length < total) {
 			toast.error('請先回答所有問題', {

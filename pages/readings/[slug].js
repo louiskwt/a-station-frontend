@@ -18,7 +18,8 @@ export async function getServerSideProps({ query: { slug } }) {
 
 		return {
 			props: {
-				ex: ex[0]
+				ex: ex[0],
+				slug
 			}
 		};
 	} catch (error) {
@@ -29,7 +30,7 @@ export async function getServerSideProps({ query: { slug } }) {
 	}
 }
 
-export default function ReadingExPage({ ex }) {
+export default function ReadingExPage({ ex, slug }) {
 	// State for Timer
 	const { startingTime, setStartingTime } = useContext(ScoreContext);
 
@@ -71,12 +72,14 @@ export default function ReadingExPage({ ex }) {
 								questions={ex.questions}
 								answers={ex.answers}
 								startingTime={startingTime}
+								slug={slug}
 							/>
 						) : (
 							<SAPanel
 								questions={ex.questions}
 								answers={ex.answers}
 								startingTime={startingTime}
+								slug={slug}
 							/>
 						)}
 					</Container>

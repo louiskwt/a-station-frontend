@@ -6,9 +6,11 @@ import ScoreContext from '@/context/ScoreContext';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
+import { useRouter } from 'next/router';
 
 export default function ScorePage() {
-	const { scoringData, finishingTime } = useContext(ScoreContext);
+	const router = useRouter();
+	const { scoringData, finishingTime, title } = useContext(ScoreContext);
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
 
@@ -27,7 +29,9 @@ export default function ScorePage() {
 		};
 	});
 
-	console.log(finishingTime);
+	useEffect(() => {
+		router.push(`/score?ex=${title}`, undefined, { shallow: true });
+	}, []);
 
 	return (
 		<Layout>
