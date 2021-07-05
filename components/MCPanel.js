@@ -3,20 +3,20 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { shuffleArray } from '@/helper/shuffle';
+import { useRouter } from 'next/router';
+import ScoreContext from '@/context/ScoreContext';
 
 export default function AnswerPanel({ questions, answers, startingTime }) {
-	// Timer State
-	const [finishingTime, setFinishingTime] = useState();
+	const router = useRouter();
 
+	const { setFinishingTime, setScoringData } = useContext(ScoreContext);
 	// Spinner state
 	const [loading, setLoading] = useState(false);
 
 	// react state for exercise
-	const [attempt, setAttempt] = useState(false);
-	const [scoringData, setScoringData] = useState([]);
 	const btnEl = useRef(null);
 
 	// exercise variable
@@ -73,7 +73,8 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 		// Handling time spent
 		let t = Date.now() - startingTime;
 		setFinishingTime(t);
-		setAttempt(true);
+
+		router.push('/score');
 	};
 
 	const handleClick = () => {
@@ -127,14 +128,6 @@ export default function AnswerPanel({ questions, answers, startingTime }) {
 						'Submit'
 					)}
 				</Button>
-				{attempt ? (
-					<Score
-						scoringData={scoringData}
-						finishingTime={finishingTime}
-					/>
-				) : (
-					''
-				)}
 			</Form>
 		</div>
 	);

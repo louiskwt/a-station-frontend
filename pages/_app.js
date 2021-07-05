@@ -1,11 +1,14 @@
 import '../styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from '@/context/AuthContext';
+import { ScoreProvider } from '@/context/ScoreContext';
 
 function MyApp({ Component, pageProps }) {
 	return (
 		<AuthProvider>
-			<Component {...pageProps} />
+			<ScoreProvider>
+				<Component {...pageProps} />
+			</ScoreProvider>
 		</AuthProvider>
 	);
 }

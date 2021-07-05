@@ -3,18 +3,21 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Score from './Score';
+import ScoreContext from '@/context/ScoreContext';
+import { useRouter } from 'next/router';
 
 export default function SAPanel({ questions, answers, startingTime }) {
+	const router = useRouter();
+
 	// Timer states
-	const [finishingTime, setFinishingTime] = useState();
+	const { setFinishingTime, setScoringData } = useContext(ScoreContext);
 
 	// React States for scoring
-	const [attempt, setAttempt] = useState(false);
-	const [scoringData, setScoringData] = useState([]);
+
 	// Spinner State
 	const [loading, setLoading] = useState(false);
 
@@ -48,8 +51,7 @@ export default function SAPanel({ questions, answers, startingTime }) {
 		setFinishingTime(t);
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
-
-		setAttempt(true);
+		router.push('/score');
 	};
 
 	const handleClick = () => {
@@ -100,13 +102,6 @@ export default function SAPanel({ questions, answers, startingTime }) {
 						'Submit'
 					)}
 				</Button>
-
-				{attempt && (
-					<Score
-						scoringData={scoringData}
-						finishingTime={finishingTime}
-					/>
-				)}
 			</Form>
 		</div>
 	);

@@ -9,6 +9,7 @@ import MCPanel from '@/components/MCPanel';
 import SAPanel from '@/components/SAPanel';
 import { useEffect, useState, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
+import ScoreContext from '@/context/ScoreContext';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
@@ -30,7 +31,7 @@ export async function getServerSideProps({ query: { slug } }) {
 
 export default function ReadingExPage({ ex }) {
 	// State for Timer
-	const [startingTime, setStartingTime] = useState();
+	const { startingTime, setStartingTime } = useContext(ScoreContext);
 
 	const { user, checkMembership } = useContext(AuthContext);
 
@@ -39,6 +40,8 @@ export default function ReadingExPage({ ex }) {
 	}
 
 	useEffect(() => setStartingTime(Date.now()), []);
+
+	console.log(startingTime);
 
 	return (
 		<Layout title={ex.title}>
