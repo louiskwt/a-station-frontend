@@ -31,15 +31,26 @@ export default function AnswerPanel({
 
 	useEffect(() => {
 		let arr = [];
-		questions.questions.map((question) => {
-			let questionObj = {
-				question: question.question
-			};
-			const shuffledOpt = shuffleArray(question.options);
-			questionObj.options = shuffledOpt;
-			arr.push(questionObj);
-		});
-		setQuestionArr(arr);
+		const populateMC = (questionArr) => {
+			if (!questionArr) {
+				return;
+			} else {
+				questionArr.map((question) => {
+					let questionObj = {
+						question: question.question
+					};
+					const shuffledOpt = shuffleArray(question.options);
+					questionObj.options = shuffledOpt;
+					arr.push(questionObj);
+				});
+				setQuestionArr(arr);
+			}
+		};
+		populateMC(questions.questions);
+
+		return () => {
+			populateMC();
+		};
 	}, []);
 
 	const handleSubmit = (e) => {

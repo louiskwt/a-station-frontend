@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 export default function ScorePage() {
 	const router = useRouter();
 	const { scoringData, finishingTime, title } = useContext(ScoreContext);
+	console.log(scoringData.length);
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
 
@@ -28,7 +29,6 @@ export default function ScorePage() {
 			clearInterval(timer);
 		};
 	});
-
 	useEffect(() => {
 		router.push(`/score?ex=${title}`, undefined, { shallow: true });
 	}, []);
