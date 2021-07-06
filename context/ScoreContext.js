@@ -14,6 +14,8 @@ export const ScoreProvider = ({ children }) => {
 
 	const [title, setTitle] = useState('');
 
+	const [type, setType] = useState('');
+
 	return (
 		<ScoreContext.Provider
 			value={{
@@ -24,7 +26,9 @@ export const ScoreProvider = ({ children }) => {
 				setScoringData,
 				finishingTime,
 				title,
-				setTitle
+				setTitle,
+				type,
+				setType
 			}}
 		>
 			{children}

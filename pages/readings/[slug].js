@@ -31,8 +31,8 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex, slug }) {
-	// State for Timer
-	const { startingTime, setStartingTime } = useContext(ScoreContext);
+	// Context states
+	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
 	const { user, checkMembership } = useContext(AuthContext);
 
@@ -44,10 +44,10 @@ export default function ReadingExPage({ ex, slug }) {
 		let mounted = true;
 		if (mounted) {
 			setStartingTime(Date.now());
+			setType('readings');
 		}
 		return () => {
 			mounted = false;
-			console.log('unmounted st');
 		};
 	}, []);
 

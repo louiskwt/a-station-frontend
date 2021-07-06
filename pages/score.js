@@ -1,5 +1,7 @@
 import Layout from '@/components/Layout';
 import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import ScoreContext from '@/context/ScoreContext';
@@ -10,7 +12,8 @@ import { useRouter } from 'next/router';
 
 export default function ScorePage() {
 	const router = useRouter();
-	const { scoringData, finishingTime, title } = useContext(ScoreContext);
+	const { scoringData, finishingTime, title, type } =
+		useContext(ScoreContext);
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
@@ -48,6 +51,7 @@ export default function ScorePage() {
 			) : (
 				<>
 					<div className='text-center mt-5'>
+						<h3>{title.replaceAll('-', ' ')}</h3>
 						<h4>
 							Score : {score} / {total}
 						</h4>
@@ -95,6 +99,10 @@ export default function ScorePage() {
 							))}
 						</tbody>
 					</Table>
+					<br />
+					<Link href={`/${type}/${title}`}>
+						<Button variant='light'>Back</Button>
+					</Link>
 				</>
 			)}
 		</Layout>

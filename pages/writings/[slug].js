@@ -8,6 +8,7 @@ import Image from 'next/image';
 import SAPanel from '@/components/SAPanel';
 import MCPanel from '@/components/MCPanel';
 import AuthContext from '@/context/AuthContext';
+import ScoreContext from '@/context/ScoreContext';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
@@ -28,8 +29,8 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex, slug }) {
-	// State for Timer
-	const [startingTime, setStartingTime] = useState();
+	// Context states
+	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
 	const { user, checkMembership } = useContext(AuthContext);
 
@@ -38,7 +39,14 @@ export default function WritingExPage({ ex, slug }) {
 	}
 
 	useEffect(() => {
-		setStartingTime(Date.now());
+		let mounted = true;
+		if (mounted) {
+			setStartingTime(Date.now());
+			setType('writings');
+		}
+		return () => {
+			mounted = false;
+		};
 	}, []);
 
 	return (
@@ -69,6 +77,7 @@ export default function WritingExPage({ ex, slug }) {
 							/>
 						) : (
 							<SAPanel
+								questions={ex.questions}
 								answers={ex.answers}
 								startingTime={startingTime}
 								slug={slug}
