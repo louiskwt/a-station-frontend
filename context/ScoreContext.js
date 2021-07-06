@@ -10,12 +10,9 @@ export const ScoreProvider = ({ children }) => {
 	// Timer State
 	const [finishingTime, setFinishingTime] = useState();
 
-	const [scoringData, setScoringData] = useState();
+	const [scoringData, setScoringData] = useState([]);
 
-	const [title, setTitle] = useState();
-
-	// Router
-	const router = useRouter();
+	const [title, setTitle] = useState('');
 
 	return (
 		<ScoreContext.Provider
