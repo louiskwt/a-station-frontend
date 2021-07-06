@@ -39,6 +39,7 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 				setLoading(false);
 				return;
 			}
+
 			scoringArr.push({ response: input, answer: ans[i] });
 		}
 
@@ -49,14 +50,8 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 		setFinishingTime(t);
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
-		router.push(`/score`);
-	};
 
-	const handleClick = () => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-		}, 1000);
+		router.push(`/score`);
 	};
 
 	return (
@@ -81,24 +76,8 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 					</Form.Group>
 				))}
 
-				<Button
-					variant='success'
-					type='submit'
-					ref={btnEl}
-					onClick={handleClick}
-				>
-					{loading ? (
-						<Spinner
-							as='span'
-							animation='border'
-							size='sm'
-							role='status'
-							aria-hidden='true'
-							variant='light'
-						/>
-					) : (
-						'Submit'
-					)}
+				<Button variant='success' type='submit' ref={btnEl}>
+					Submit
 				</Button>
 			</Form>
 		</div>

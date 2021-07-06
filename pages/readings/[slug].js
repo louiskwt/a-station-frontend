@@ -36,13 +36,14 @@ export default function ReadingExPage({ ex, slug }) {
 
 	const { user, checkMembership } = useContext(AuthContext);
 
+	if (ex.premium === true) {
+		checkMembership(user);
+	}
+
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
 			setStartingTime(Date.now());
-			if (ex.premium === true) {
-				checkMembership(user);
-			}
 		}
 		return () => {
 			mounted = false;
