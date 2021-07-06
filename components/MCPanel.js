@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect, useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -93,13 +92,6 @@ export default function AnswerPanel({
 		router.push('/score');
 	};
 
-	const handleClick = () => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-		}, 1000);
-	};
-
 	return (
 		<div className='mt-4 col-10 offset-1'>
 			<ToastContainer />
@@ -125,24 +117,8 @@ export default function AnswerPanel({
 						</Form.Group>
 					))}
 
-				<Button
-					variant='success'
-					type='submit'
-					ref={btnEl}
-					onClick={handleClick}
-				>
-					{loading ? (
-						<Spinner
-							as='span'
-							animation='border'
-							size='sm'
-							role='status'
-							aria-hidden='true'
-							variant='light'
-						/>
-					) : (
-						'Submit'
-					)}
+				<Button variant='success' type='submit' ref={btnEl}>
+					Submit
 				</Button>
 			</Form>
 		</div>
