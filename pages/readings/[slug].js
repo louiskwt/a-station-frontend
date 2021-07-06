@@ -40,9 +40,16 @@ export default function ReadingExPage({ ex, slug }) {
 		checkMembership(user);
 	}
 
-	useEffect(() => setStartingTime(Date.now()), []);
-
-	console.log(startingTime);
+	useEffect(() => {
+		let mounted = true;
+		if (mounted) {
+			setStartingTime(Date.now());
+		}
+		return () => {
+			mounted = false;
+			console.log('unmounted st');
+		};
+	}, []);
 
 	return (
 		<Layout title={ex.title}>

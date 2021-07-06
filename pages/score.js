@@ -9,29 +9,34 @@ import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 import { useRouter } from 'next/router';
 
 export default function ScorePage() {
-	const router = useRouter();
-	const { scoringData, finishingTime, title } = useContext(ScoreContext);
-	console.log(scoringData.length);
+	const { scoringData, finishingTime } = useContext(ScoreContext);
+
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
 
 	useEffect(() => {
 		const totalPoint = calculatingPoint(scoringData);
 
-		const timer = setInterval(() => {
-			if (score === totalPoint) {
-				return;
-			} else {
-				setSscore(score + 1);
-			}
-		}, 300);
+		let mounted = true;
+		let timer;
+		if (mounted) {
+			timer = setInterval(() => {
+				if (score === totalPoint) {
+					mounted = false;
+				} else {
+					setSscore(score + 1);
+				}
+			}, 300);
+		}
+
 		return () => {
+			console.log('fired');
 			clearInterval(timer);
 		};
 	});
-	useEffect(() => {
-		router.push(`/score?ex=${title}`, undefined, { shallow: true });
-	}, []);
+	// useEffect(() => {
+	// 	router.push(`/score?ex=${title}`, undefined, { shallow: true });
+	// }, []);
 
 	return (
 		<Layout>
