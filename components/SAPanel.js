@@ -2,8 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
-import { useState, useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScoreContext from '@/context/ScoreContext';
@@ -15,14 +14,11 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 	const { setFinishingTime, setScoringData, setTitle } =
 		useContext(ScoreContext);
 
-	// Spinner State
-	const [loading, setLoading] = useState(false);
-
 	const btnEl = useRef(null);
 	// Ex variables
 	const ans = answers.answers;
 	const questionData = questions.questions[0];
-	const scoringArr = [];
+	let scoringArr = [];
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -33,10 +29,10 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 			const input = `e.target.q${i + 1}.value`;
 			input = eval(input);
 			if (input === '') {
+				scoringArr = [];
 				toast.error('請先回答所有問題', {
 					position: 'top-center'
 				});
-				setLoading(false);
 				return;
 			}
 

@@ -31,7 +31,7 @@ export default function ScorePage() {
 		}
 
 		return () => {
-			console.log('fired');
+			mounted = false;
 			clearInterval(timer);
 		};
 	});

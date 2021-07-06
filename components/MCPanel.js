@@ -17,8 +17,6 @@ export default function AnswerPanel({
 
 	const { setFinishingTime, setScoringData, setTitle } =
 		useContext(ScoreContext);
-	// Spinner state
-	const [loading, setLoading] = useState(false);
 
 	// react state for exercise
 	const btnEl = useRef(null);
