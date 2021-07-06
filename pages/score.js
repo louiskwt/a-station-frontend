@@ -12,8 +12,17 @@ import { useRouter } from 'next/router';
 
 export default function ScorePage() {
 	const router = useRouter();
-	const { scoringData, finishingTime, title, type } =
-		useContext(ScoreContext);
+	const {
+		scoringData,
+		setScoringData,
+		finishingTime,
+		setFinishingTime,
+		title,
+		type,
+		setType,
+		setTitle,
+		setStartingTime
+	} = useContext(ScoreContext);
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
@@ -43,6 +52,14 @@ export default function ScorePage() {
 			router.push(`/score?ex=${title}`, undefined, { shallow: true });
 		}
 	}, []);
+
+	const handleClick = () => {
+		setScoringData([]);
+		setFinishingTime(0);
+		setType('');
+		setTitle('');
+		setStartingTime(0);
+	};
 
 	return (
 		<Layout title={'Your Score'}>
@@ -101,7 +118,9 @@ export default function ScorePage() {
 					</Table>
 					<br />
 					<Link href={`/${type}/${title}`}>
-						<Button variant='light'>Back</Button>
+						<Button variant='light' onClick={handleClick}>
+							再試一次
+						</Button>
 					</Link>
 				</>
 			)}
