@@ -10,11 +10,15 @@ import SAPanel from '@/components/SAPanel';
 import { useEffect, useState, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
 import ScoreContext from '@/context/ScoreContext';
+import { parseCookies } from '@/helper/cookie';
 
-export async function getServerSideProps({ query: { slug } }) {
+export async function getServerSideProps({ query: { slug }, req }) {
 	try {
 		const res = await fetch(`${API_URL}/readings?slug=${slug}`);
 		const ex = await res.json();
+		let { token } = parseCookies(req);
+
+		console.log(req.headers);
 
 		return {
 			props: {
@@ -31,6 +35,7 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex, slug }) {
+	console.log(typeof token);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
