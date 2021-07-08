@@ -11,7 +11,7 @@ import { useEffect, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
 import ScoreContext from '@/context/ScoreContext';
 
-export async function getServerSideProps({ query: { slug }, req }) {
+export async function getServerSideProps({ query: { slug } }) {
 	try {
 		const res = await fetch(`${API_URL}/readings?slug=${slug}`);
 		const ex = await res.json();
@@ -31,7 +31,6 @@ export async function getServerSideProps({ query: { slug }, req }) {
 }
 
 export default function ReadingExPage({ ex, slug }) {
-	console.log(typeof token);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
