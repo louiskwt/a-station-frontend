@@ -15,6 +15,19 @@ export const ScoreProvider = ({ children }) => {
 
 	const [type, setType] = useState('');
 
+	const [record, setRecord] = useState({});
+
+	const recordScore = (totalPoint, total) => {
+		const date = Date.now();
+		setRecord({
+			title,
+			score: totalPoint,
+			time: finishingTime,
+			total,
+			date
+		});
+	};
+
 	return (
 		<ScoreContext.Provider
 			value={{
@@ -27,7 +40,9 @@ export const ScoreProvider = ({ children }) => {
 				title,
 				setTitle,
 				type,
-				setType
+				setType,
+				recordScore,
+				record
 			}}
 		>
 			{children}

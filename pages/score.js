@@ -41,14 +41,15 @@ export default function ScorePage({ token }) {
 		type,
 		setType,
 		setTitle,
-		setStartingTime
+		setStartingTime,
+		record,
+		recordScore
 	} = useContext(ScoreContext);
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
-	const [record, setRecord] = useState({});
+
 	const totalPoint = calculatingPoint(scoringData);
-	const currentDate = Date.now();
 
 	useEffect(() => {
 		let mounted = true;
@@ -70,9 +71,16 @@ export default function ScorePage({ token }) {
 	});
 
 	useEffect(() => {
-		if (title !== '') {
-			router.push(`/score?ex=${title}`, undefined, { shallow: true });
+		let mounted = true;
+		if (mounted) {
+			if (title !== '') {
+				router.push(`/score?ex=${title}`, undefined, { shallow: true });
+			}
 		}
+		return () => {
+			console.log('unmounted');
+			mounted = false;
+		};
 	}, []);
 
 	const handleClick = () => {
@@ -81,6 +89,26 @@ export default function ScorePage({ token }) {
 		setType('');
 		setTitle('');
 		setStartingTime(0);
+	};
+
+	const handleRecord = async () => {
+		const recording = await recordScore(totalPoint, total);
+		console.log(record);
+		const res = await fetch(`${API_URL}/records`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify(record)
+		});
+
+		if (!res.ok) {
+			console.log('Something went wrong');
+			return;
+		} else {
+			console.log('succeess');
+		}
 	};
 
 	return (
@@ -110,6 +138,12 @@ export default function ScorePage({ token }) {
 						<br />
 						<br />
 					</div>
+
+					<Button variant='Info' onClick={handleRecord}>
+						儲存成績
+					</Button>
+
+					<br />
 					{/* Table */}
 					<Table striped bordered hover>
 						<thead>
