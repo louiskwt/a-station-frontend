@@ -7,18 +7,14 @@ import Image from 'next/image';
 import Passage from '@/components/Passage';
 import MCPanel from '@/components/MCPanel';
 import SAPanel from '@/components/SAPanel';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
 import ScoreContext from '@/context/ScoreContext';
-import { parseCookies } from '@/helper/cookie';
 
 export async function getServerSideProps({ query: { slug }, req }) {
 	try {
 		const res = await fetch(`${API_URL}/readings?slug=${slug}`);
 		const ex = await res.json();
-		let { token } = parseCookies(req);
-
-		console.log(req.headers);
 
 		return {
 			props: {
