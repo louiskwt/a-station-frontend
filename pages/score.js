@@ -9,8 +9,27 @@ import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 import { useRouter } from 'next/router';
+import { parseCookies } from '@/helper/cookie';
 
-export default function ScorePage() {
+export async function getServerSideProps({ req }) {
+	const { token } = parseCookies(req);
+	console.log(req.headers.cookie);
+
+	if (token) {
+		return {
+			props: {
+				token
+			}
+		};
+	} else {
+		return {
+			props: {}
+		};
+	}
+}
+
+export default function ScorePage({ token }) {
+	console.log(token);
 	const router = useRouter();
 	const {
 		scoringData,
