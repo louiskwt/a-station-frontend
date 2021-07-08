@@ -10,6 +10,7 @@ import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 import { useRouter } from 'next/router';
 import { parseCookies } from '@/helper/cookie';
+import { API_URL } from '../config';
 
 export async function getServerSideProps({ req }) {
 	const { token } = parseCookies(req);
@@ -45,10 +46,11 @@ export default function ScorePage({ token }) {
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
+	const [record, setRecord] = useState({});
+	const totalPoint = calculatingPoint(scoringData);
+	const currentDate = Date.now();
 
 	useEffect(() => {
-		const totalPoint = calculatingPoint(scoringData);
-
 		let mounted = true;
 		let timer;
 		if (mounted) {
@@ -66,6 +68,7 @@ export default function ScorePage({ token }) {
 			clearInterval(timer);
 		};
 	});
+
 	useEffect(() => {
 		if (title !== '') {
 			router.push(`/score?ex=${title}`, undefined, { shallow: true });
