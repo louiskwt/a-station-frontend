@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { shuffleArray } from '@/helper/shuffle';
 import { useRouter } from 'next/router';
+import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 import ScoreContext from '@/context/ScoreContext';
 
 export default function AnswerPanel({
@@ -15,7 +16,7 @@ export default function AnswerPanel({
 }) {
 	const router = useRouter();
 
-	const { setFinishingTime, setScoringData, setTitle } =
+	const { setFinishingTime, setScoringData, setTitle, recordScore } =
 		useContext(ScoreContext);
 
 	// react state for exercise
@@ -81,11 +82,16 @@ export default function AnswerPanel({
 			});
 			return;
 		}
+
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 		// Handling time spent
 		let t = Date.now() - startingTime;
 		setFinishingTime(t);
+		const time = millisToMinAndSeconds(t);
+		const totalPoint = calculatingPoint(scoringArr);
+
+		recordScore(totalPoint, total, time, slug);
 
 		router.push('/score');
 	};
