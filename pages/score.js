@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import ScoreContext from '@/context/ScoreContext';
+import AuthContext, { AuthProvider } from '@/context/AuthContext';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
@@ -43,6 +44,7 @@ export default function ScorePage({ token }) {
 		record,
 		recordScore
 	} = useContext(ScoreContext);
+	const { user } = useContext(AuthContext);
 
 	console.log(record);
 
@@ -138,11 +140,6 @@ export default function ScorePage({ token }) {
 						<br />
 					</div>
 
-					<Button variant='Info' onClick={handleRecord}>
-						儲存成績
-					</Button>
-
-					<br />
 					{/* Table */}
 					<Table striped bordered hover>
 						<thead>
@@ -172,11 +169,18 @@ export default function ScorePage({ token }) {
 						</tbody>
 					</Table>
 					<br />
-					<Link href={`/${type}/${title}`}>
-						<Button variant='light' onClick={handleClick}>
-							再試一次
-						</Button>
-					</Link>
+					<div className='d-flex justify-content-between'>
+						<Link href={`/${type}/${title}`}>
+							<Button variant='light' onClick={handleClick}>
+								再試一次
+							</Button>
+						</Link>
+						{user.type !== 'guest' && (
+							<Button variant='info' onClick={handleRecord}>
+								儲存成績
+							</Button>
+						)}
+					</div>
 				</>
 			)}
 		</Layout>
