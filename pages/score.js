@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import ScoreContext from '@/context/ScoreContext';
-import AuthContext, { AuthProvider } from '@/context/AuthContext';
+import AuthContext from '@/context/AuthContext';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
@@ -41,8 +41,7 @@ export default function ScorePage({ token }) {
 		setType,
 		setTitle,
 		setStartingTime,
-		record,
-		recordScore
+		record
 	} = useContext(ScoreContext);
 	const { user } = useContext(AuthContext);
 
@@ -75,13 +74,11 @@ export default function ScorePage({ token }) {
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
-			console.log('fired');
 			if (title !== '') {
 				router.push(`/score?ex=${title}`, undefined, { shallow: true });
 			}
 		}
 		return () => {
-			console.log('unmounted');
 			mounted = false;
 		};
 	}, []);
