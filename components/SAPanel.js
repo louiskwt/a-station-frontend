@@ -7,11 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScoreContext from '@/context/ScoreContext';
 import { useRouter } from 'next/router';
+import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 
 export default function SAPanel({ questions, answers, startingTime, slug }) {
 	const router = useRouter();
 	// Timer states
-	const { setFinishingTime, setScoringData, setTitle } =
+	const { setFinishingTime, setScoringData, setTitle, recordScore } =
 		useContext(ScoreContext);
 
 	const btnEl = useRef(null);
@@ -40,10 +41,16 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 		}
 
 		setScoringData(scoringArr);
+		const totalPoint = calculatingPoint(scoringArr);
 		setTitle(slug);
 		let t = Date.now();
 		t = t - startingTime;
 		setFinishingTime(t);
+
+		const time = millisToMinAndSeconds(t);
+
+		recordScore(totalPoint, totalQuestion, time, slug);
+
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 

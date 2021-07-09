@@ -29,7 +29,6 @@ export async function getServerSideProps({ req }) {
 }
 
 export default function ScorePage({ token }) {
-	console.log(token);
 	const router = useRouter();
 	const {
 		scoringData,
@@ -44,6 +43,8 @@ export default function ScorePage({ token }) {
 		record,
 		recordScore
 	} = useContext(ScoreContext);
+
+	console.log(record);
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
@@ -72,6 +73,7 @@ export default function ScorePage({ token }) {
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
+			console.log('fired');
 			if (title !== '') {
 				router.push(`/score?ex=${title}`, undefined, { shallow: true });
 			}
@@ -91,8 +93,6 @@ export default function ScorePage({ token }) {
 	};
 
 	const handleRecord = async () => {
-		const recording = await recordScore(totalPoint, total);
-		console.log(record);
 		const res = await fetch(`${API_URL}/records`, {
 			method: 'POST',
 			headers: {

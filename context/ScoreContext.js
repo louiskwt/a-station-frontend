@@ -17,12 +17,12 @@ export const ScoreProvider = ({ children }) => {
 
 	const [record, setRecord] = useState({});
 
-	const recordScore = (totalPoint, total) => {
+	const recordScore = (totalPoint, total, time, title) => {
 		const date = Date.now();
 		setRecord({
 			title,
 			score: totalPoint,
-			time: finishingTime,
+			time,
 			total,
 			date
 		});
