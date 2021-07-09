@@ -11,7 +11,8 @@ import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
 import { useRouter } from 'next/router';
 import { parseCookies } from '@/helper/cookie';
-import { API_URL } from '../config';
+import { API_URL } from '@/config/index';
+import { ToastContainer, toast } from 'react-toastify';
 
 export async function getServerSideProps({ req }) {
 	const { token } = parseCookies(req);
@@ -102,15 +103,23 @@ export default function ScorePage({ token }) {
 		});
 
 		if (!res.ok) {
-			console.log('Something went wrong');
+			toast.warning('噢～儲存失敗，請重試', {
+				position: 'top-center',
+				autoClose: 3000
+			});
 			return;
 		} else {
 			console.log('succeess');
+			toast.success('🦄 成功儲存～', {
+				position: 'top-center',
+				autoClose: 3000
+			});
 		}
 	};
 
 	return (
 		<Layout title={'Your Score'}>
+			<ToastContainer />
 			{scoringData.length === 0 ? (
 				''
 			) : (
