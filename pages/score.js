@@ -14,7 +14,6 @@ import { API_URL } from '../config';
 
 export async function getServerSideProps({ req }) {
 	const { token } = parseCookies(req);
-	console.log(req.headers.cookie);
 
 	if (token) {
 		return {
