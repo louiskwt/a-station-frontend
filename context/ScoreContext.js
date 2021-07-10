@@ -4,9 +4,8 @@ const ScoreContext = createContext();
 
 export const ScoreProvider = ({ children }) => {
 	// State
-	// State for Timer
 	const [startingTime, setStartingTime] = useState(0);
-	// Timer State
+
 	const [finishingTime, setFinishingTime] = useState();
 
 	const [scoringData, setScoringData] = useState([]);
