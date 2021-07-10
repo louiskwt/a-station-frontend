@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout';
+import RecordTable from '@/components/RecordTable';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import AuthContext from '@/context/AuthContext';
@@ -24,7 +25,7 @@ export async function getServerSideProps({ query: { user } }) {
 }
 
 export default function DashboardPage({ record }) {
-	console.log(record);
+	console.log(record[1].published_at);
 	const { user } = useContext(AuthContext);
 
 	return (
@@ -51,6 +52,13 @@ export default function DashboardPage({ record }) {
 								</tr>
 							</tbody>
 						</Table>{' '}
+					</>
+				)}
+				<hr />
+				{record && (
+					<>
+						<h2 className='mt-5'>站內成績</h2>
+						<RecordTable record={record} />
 					</>
 				)}
 			</Container>
