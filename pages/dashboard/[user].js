@@ -3,8 +3,28 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import AuthContext from '@/context/AuthContext';
 import { useContext } from 'react';
+import { API_URL } from '@/config/index';
 
-export default function DashboardPage() {
+export async function getServerSideProps({ query: { user } }) {
+	try {
+		const res = await fetch(`${API_URL}/records?user.username=${user}`);
+		const record = await res.json();
+		console.log(record);
+		return {
+			props: {
+				record
+			}
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			notFound: true
+		};
+	}
+}
+
+export default function DashboardPage({ record }) {
+	console.log(record);
 	const { user } = useContext(AuthContext);
 
 	return (

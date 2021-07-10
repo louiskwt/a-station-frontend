@@ -52,7 +52,7 @@ export default function Header() {
 						{user && user.type !== 'guest' ? (
 							// If logged in
 							<>
-								<Link href='/dashboard'>
+								<Link href={`/dashboard/${user.username}`}>
 									<span className='nav-link' role='button'>
 										Hi, {user.username}
 									</span>
