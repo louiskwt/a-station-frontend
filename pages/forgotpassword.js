@@ -9,30 +9,31 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useContext } from 'react';
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
 	// ContextAPI state and function
 	const { login, loading, setLoading } = useContext(AuthContext);
 	// Login State
 	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setLoading(true);
-		if (e.target.email.value === '' || e.target.password.value === '') {
-			toast.error('請先輸入電郵和密碼', {
+		if (e.target.email.value === '') {
+			toast.error('請先輸入電郵', {
 				position: 'top-center'
 			});
 			setLoading(false);
 			return;
 		}
-		login({ email, password });
 	};
 
 	return (
 		<Layout>
 			<Container>
-				<h2 className='text-center mt-5'>登入 A-Station</h2>
+				<h2 className='text-center mt-5'>忘記密碼</h2>
+				<p className='text-center mt-3'>
+					請輸入你註冊時使用的電郵去重設密碼～
+				</p>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group>
 						<Form.Label>Email</Form.Label>
@@ -46,17 +47,6 @@ export default function LoginPage() {
 						/>
 					</Form.Group>
 
-					<Form.Group className='mt-4'>
-						<Form.Label>Password</Form.Label>
-
-						<Form.Control
-							type='password'
-							placeholder='Password'
-							name='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</Form.Group>
 					<Button
 						variant='success'
 						className='mt-5'
@@ -73,16 +63,10 @@ export default function LoginPage() {
 								variant='light'
 							/>
 						) : (
-							'登入'
+							'重設密碼'
 						)}
 					</Button>
 				</Form>
-				<p className='mt-5 text-center'>
-					沒有帳號？ <Link href='/signup'>按此註冊</Link>
-				</p>
-				<p className='mt-3 text-center'>
-					忘記密碼？ <Link href='/forgotpassword'>按此重設</Link>
-				</p>
 			</Container>
 		</Layout>
 	);
