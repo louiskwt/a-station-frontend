@@ -10,7 +10,6 @@ export async function getServerSideProps({ query: { user } }) {
 	try {
 		const res = await fetch(`${API_URL}/records?user.username=${user}`);
 		const record = await res.json();
-		console.log(record);
 		return {
 			props: {
 				record
@@ -25,7 +24,6 @@ export async function getServerSideProps({ query: { user } }) {
 }
 
 export default function DashboardPage({ record }) {
-	console.log(record[1].published_at);
 	const { user } = useContext(AuthContext);
 
 	return (
