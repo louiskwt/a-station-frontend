@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import RecordTable from '@/components/RecordTable';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import AuthContext from '@/context/AuthContext';
@@ -59,6 +60,10 @@ export default function DashboardPage({ record }) {
 						<RecordTable record={record} />
 					</>
 				)}
+				<br />
+				<Button variant='danger' size='lg'>
+					重設密碼
+				</Button>
 			</Container>
 		</Layout>
 	);
