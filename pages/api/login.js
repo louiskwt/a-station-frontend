@@ -29,6 +29,8 @@ export default async (req, res) => {
 				})
 			);
 
+			// console.log(data.jwt);
+
 			res.status(200).json({ user: data.user });
 		} else {
 			if (data.statusCode === 400) {
