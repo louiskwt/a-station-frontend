@@ -124,6 +124,33 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
+	// Forgot password
+	// Login user
+	const forgotPassword = async (email) => {
+		const res = await fetch(`${NEXT_URL}/api/forgotpassword`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email })
+		});
+		const data = await res.json();
+
+		if (res.ok) {
+			setStatus('success');
+			setMessage(data.message);
+			setMessage(null);
+			setLoading(false);
+			setStatus(null);
+		} else {
+			setStatus('failed');
+			setMessage(data.message);
+			setMessage(null);
+			setLoading(false);
+			setStatus(null);
+		}
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -137,7 +164,8 @@ export const AuthProvider = ({ children }) => {
 				setLoading,
 				checkMembership,
 				text,
-				setText
+				setText,
+				forgotPassword
 			}}
 		>
 			{children}

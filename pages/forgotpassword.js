@@ -1,28 +1,64 @@
+import { useState, useContext } from 'react';
+import AuthContext from '@/context/AuthContext';
 import Layout from '@/components/Layout';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
-import 'react-toastify/dist/ReactToastify.css';
-import Link from 'next/link';
-import { FaWhatsapp } from 'react-icons/fa';
 
 export default function ForgotPasswordPage() {
+	const { setMessage, loading, setLoading, forgotPassword } =
+		useContext(AuthContext);
+	const [email, setEmail] = useState('');
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setLoading(true);
+		if (email === '') {
+			setMessage('請先輸入email');
+			setLoading(false);
+			return;
+		}
+
+		forgotPassword(email);
+	};
 	return (
 		<Layout>
 			<Container>
 				<h2 className='text-center mt-5'>忘記密碼?</h2>
-				<h4 className='text-center mt-5'>
-					請email: kawingt2@gmail.com
-				</h4>
-				<h4 className='text-center mt-3'>或</h4>
-				<h4 className='text-center mt-3'>
-					通過WhatsApp:{' '}
-					<Link href='https://wa.me/85263520220?text=我想重設密碼%20thanks!'>
-						<a>
-							<FaWhatsapp size={36} style={{ color: 'green' }} />
-						</a>
-					</Link>{' '}
-					去聯絡我
-				</h4>
-				<h4 className='text-center mt-5'>我會盡快幫你重設密碼</h4>
+				<h5 className='text-center mt-5'>請輸入你註冊時使用的email</h5>
+
+				<Form onSubmit={handleSubmit}>
+					<Form.Group>
+						<Form.Label>Email</Form.Label>
+
+						<Form.Control
+							type='email'
+							placeholder='Email'
+							name='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</Form.Group>
+					<Button
+						variant='success'
+						className='mt-5'
+						type='submit'
+						block
+					>
+						{loading ? (
+							<Spinner
+								as='span'
+								animation='border'
+								size='sm'
+								role='status'
+								aria-hidden='true'
+								variant='light'
+							/>
+						) : (
+							'確認'
+						)}
+					</Button>
+				</Form>
 			</Container>
 		</Layout>
 	);
