@@ -25,7 +25,7 @@ export async function getServerSideProps({ query: { code }, req }) {
 	}
 }
 
-export default function ForgotPasswordPage() {
+export default function ResetPasswordPage() {
 	const { setMessage, loading, setLoading } = useContext(AuthContext);
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
