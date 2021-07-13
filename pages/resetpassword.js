@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 
-export async function getServerSideProps({ query: { code }, req }) {
+export async function getServerSideProps({ query: { code } }) {
 	console.log(code);
 	try {
 		if (!code) {
@@ -25,20 +25,26 @@ export async function getServerSideProps({ query: { code }, req }) {
 	}
 }
 
-export default function ResetPasswordPage() {
-	const { setMessage, loading, setLoading } = useContext(AuthContext);
+export default function ResetPasswordPage({ code }) {
+	const { setMessage, loading, setLoading, resetPassword } =
+		useContext(AuthContext);
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setLoading(true);
-		if (email === '') {
+		if (password === '' || confirmPassword === '') {
 			setMessage('請先輸入新密碼和確認新密碼');
 			setLoading(false);
 			return;
 		}
-
-		console.log('confirmed');
+		if (password !== confirmPassword) {
+			setMessage('兩次輸入的密碼碼不一樣');
+			setLoading(false);
+			return;
+		} else {
+			resetPassword(code, password);
+		}
 	};
 	return (
 		<Layout>
@@ -78,9 +84,7 @@ export default function ResetPasswordPage() {
 								confirmPassword === password &&
 								password.length > 0
 							}
-							isInvalid={
-								confirmPassword !== password && submitted
-							}
+							isInvalid={confirmPassword !== password}
 						/>
 					</Form.Group>
 					<Button
