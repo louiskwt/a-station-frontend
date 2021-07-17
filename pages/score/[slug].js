@@ -9,21 +9,31 @@ import AuthContext from '@/context/AuthContext';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useEffect, useState, useContext } from 'react';
 import { calculatingPoint, millisToMinAndSeconds } from '@/helper/scoring';
-import { useRouter } from 'next/router';
 import { parseCookies } from '@/helper/cookie';
 import { API_URL } from '@/config/index';
 import { ToastContainer, toast } from 'react-toastify';
 import Ranking from '@/components/Ranking';
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, query: { slug } }) {
 	const { token } = parseCookies(req);
+	console.log(slug);
 
 	if (token) {
-		return {
-			props: {
-				token
-			}
-		};
+		try {
+			const res = await fetch(`${API_URL}/records?title=${slug}`);
+			const data = await res.json();
+			return {
+				props: {
+					token,
+					data
+				}
+			};
+		} catch (error) {
+			console.error(error);
+			return {
+				notFound: true
+			};
+		}
 	} else {
 		return {
 			props: {}
@@ -31,8 +41,8 @@ export async function getServerSideProps({ req }) {
 	}
 }
 
-export default function ScorePage({ token }) {
-	const router = useRouter();
+export default function ScorePage({ token, data }) {
+	console.log(data);
 	const {
 		scoringData,
 		setScoringData,
