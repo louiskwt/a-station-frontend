@@ -73,17 +73,17 @@ export default function ScorePage({ token }) {
 		};
 	});
 
-	useEffect(() => {
-		let mounted = true;
-		if (mounted) {
-			if (title !== '') {
-				router.push(`/score?ex=${title}`, undefined, { shallow: true });
-			}
-		}
-		return () => {
-			mounted = false;
-		};
-	}, []);
+	// useEffect(() => {
+	// 	let mounted = true;
+	// 	if (mounted) {
+	// 		if (title !== '') {
+	// 			router.push(`/score?ex=${title}`, undefined, { shallow: true });
+	// 		}
+	// 	}
+	// 	return () => {
+	// 		mounted = false;
+	// 	};
+	// }, []);
 
 	const handleClick = () => {
 		setScoringData([]);

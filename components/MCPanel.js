@@ -93,7 +93,7 @@ export default function AnswerPanel({
 
 		recordScore(totalPoint, total, time, slug);
 
-		router.push('/score');
+		router.push(`/score/${slug}`);
 	};
 
 	return (

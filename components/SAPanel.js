@@ -54,7 +54,7 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 		btnEl.current.blur();
 		btnEl.current.disabled = 'true';
 
-		router.push(`/score`);
+		router.push(`/score/${slug}`);
 	};
 
 	return (
