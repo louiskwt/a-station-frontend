@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { parseCookies } from '@/helper/cookie';
 import { API_URL } from '@/config/index';
 import { ToastContainer, toast } from 'react-toastify';
+import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ req }) {
 	const { token } = parseCookies(req);
@@ -117,6 +118,12 @@ export default function ScorePage({ token }) {
 		}
 	};
 
+	// Modal
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
 	return (
 		<Layout title={'Your Score'}>
 			<ToastContainer />
@@ -144,6 +151,12 @@ export default function ScorePage({ token }) {
 						/>
 						<br />
 						<br />
+					</div>
+
+					<div className='d-flex justify-content-between'>
+						<Button variant='info' onClick={handleShow}>
+							排行旁
+						</Button>
 					</div>
 
 					{/* Table */}
@@ -182,11 +195,16 @@ export default function ScorePage({ token }) {
 							</Button>
 						</Link>
 						{user.type !== 'guest' && (
-							<Button variant='info' onClick={handleRecord}>
+							<Button variant='success' onClick={handleRecord}>
 								儲存成績
 							</Button>
 						)}
 					</div>
+					<Ranking
+						show={show}
+						title={title}
+						handleClose={handleClose}
+					/>
 				</>
 			)}
 		</Layout>
