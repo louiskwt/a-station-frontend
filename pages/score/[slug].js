@@ -154,9 +154,9 @@ export default function ScorePage({ token, rankingData }) {
 						<br />
 					</div>
 
-					<div className='d-flex justify-content-between'>
+					<div className='d-flex justify-content-between mb-5'>
 						<Button variant='info' onClick={handleShow}>
-							排行旁
+							排行榜
 						</Button>
 					</div>
 

@@ -7,7 +7,7 @@ export default function Ranking({ show, rankingData, handleClose }) {
 	return (
 		<Modal show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
-				<Modal.Title>Modal heading</Modal.Title>
+				<Modal.Title>排行榜</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<Table striped bordered hover>
