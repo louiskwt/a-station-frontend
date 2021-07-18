@@ -1,5 +1,4 @@
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
 export default function Ranking({ show, rankingData, handleClose }) {

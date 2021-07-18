@@ -41,13 +41,6 @@ export async function getServerSideProps({ req, query: { slug } }) {
 }
 
 export default function ScorePage({ token, rankingData }) {
-	// console.log(typeof rankingData);
-
-	// let ranking = [];
-	// rankingData.map((data) => {
-	// 	ranking.push(data);
-	// });
-
 	const {
 		scoringData,
 		setScoringData,
