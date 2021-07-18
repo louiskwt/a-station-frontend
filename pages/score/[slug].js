@@ -16,16 +16,15 @@ import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ req, query: { slug } }) {
 	const { token } = parseCookies(req);
-	console.log(slug);
 
 	if (token) {
 		try {
 			const res = await fetch(`${API_URL}/records?title=${slug}`);
-			const data = await res.json();
+			const rankingData = await res.json();
 			return {
 				props: {
 					token,
-					data
+					rankingData
 				}
 			};
 		} catch (error) {
@@ -41,8 +40,14 @@ export async function getServerSideProps({ req, query: { slug } }) {
 	}
 }
 
-export default function ScorePage({ token, data }) {
-	console.log(data);
+export default function ScorePage({ token, rankingData }) {
+	// console.log(typeof rankingData);
+
+	// let ranking = [];
+	// rankingData.map((data) => {
+	// 	ranking.push(data);
+	// });
+
 	const {
 		scoringData,
 		setScoringData,
@@ -56,8 +61,6 @@ export default function ScorePage({ token, data }) {
 		record
 	} = useContext(ScoreContext);
 	const { user } = useContext(AuthContext);
-
-	console.log(record);
 
 	const total = scoringData.length;
 	const [score, setSscore] = useState(0);
@@ -200,7 +203,7 @@ export default function ScorePage({ token, data }) {
 					</div>
 					<Ranking
 						show={show}
-						title={title}
+						rankingData={rankingData}
 						handleClose={handleClose}
 					/>
 				</>
