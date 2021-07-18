@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
 export default function Ranking({ show, rankingData, handleClose }) {
-	console.log(rankingData);
+	// Sort the record to rank
+	rankingData.sort((a, b) => b.score - a.score);
 	return (
 		<Modal show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
@@ -33,14 +34,6 @@ export default function Ranking({ show, rankingData, handleClose }) {
 					</tbody>
 				</Table>
 			</Modal.Body>
-			<Modal.Footer>
-				<Button variant='secondary' onClick={handleClose}>
-					Close
-				</Button>
-				<Button variant='primary' onClick={handleClose}>
-					Save Changes
-				</Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }
