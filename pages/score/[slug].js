@@ -147,11 +147,20 @@ export default function ScorePage({ token, rankingData }) {
 						<br />
 					</div>
 
-					<div className='d-flex justify-content-between mb-5'>
-						<Button variant='info' onClick={handleShow}>
-							排行榜
-						</Button>
-					</div>
+					{rankingData ? (
+						<div className='d-flex justify-content-between mb-5'>
+							<Button variant='info' onClick={handleShow}>
+								排行榜
+							</Button>
+							<Ranking
+								show={show}
+								rankingData={rankingData}
+								handleClose={handleClose}
+							/>
+						</div>
+					) : (
+						''
+					)}
 
 					{/* Table */}
 					<Table striped bordered hover>
@@ -194,11 +203,6 @@ export default function ScorePage({ token, rankingData }) {
 							</Button>
 						)}
 					</div>
-					<Ranking
-						show={show}
-						rankingData={rankingData}
-						handleClose={handleClose}
-					/>
 				</>
 			)}
 		</Layout>
