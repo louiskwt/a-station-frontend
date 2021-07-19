@@ -53,7 +53,7 @@ export default function DashboardPage({ record }) {
 					</>
 				)}
 				<hr />
-				{record && (
+				{user.type !== 'guest' && (
 					<>
 						<h2 className='mt-5'>站內成績</h2>
 						<RecordTable record={record} />
