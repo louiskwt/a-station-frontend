@@ -48,7 +48,7 @@ export default function DashboardPage({ record }) {
 	return (
 		<Layout>
 			<Container>
-				{user && (
+				{user.type !== 'guest' && (
 					<>
 						{' '}
 						<h1 className='text-center mt-5'>{user.username}</h1>
