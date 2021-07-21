@@ -86,9 +86,18 @@ export default function WritingExPage({ ex, slug }) {
 					</Container>
 					<br />
 					<br />
-					<Link href='/writings'>
-						<Button variant='light'>Back</Button>
-					</Link>{' '}
+					<div className='d-flex justify-content-between mt-5'>
+						<Link href='/readings'>
+							<Button variant='light'>Back</Button>
+						</Link>
+
+						<a
+							href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
+							target='_blank'
+						>
+							<Button variant='warning'>題目/答案有問題</Button>
+						</a>
+					</div>
 				</>
 			)}
 		</Layout>
