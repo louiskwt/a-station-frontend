@@ -147,20 +147,28 @@ export default function ScorePage({ token, rankingData }) {
 						<br />
 					</div>
 
-					{rankingData ? (
-						<div className='d-flex justify-content-between mb-5'>
-							<Button variant='info' onClick={handleShow}>
-								排行榜
-							</Button>
-							<Ranking
-								show={show}
-								rankingData={rankingData}
-								handleClose={handleClose}
-							/>
-						</div>
-					) : (
-						''
-					)}
+					<div className='d-flex justify-content-between mb-5'>
+						{rankingData ? (
+							<>
+								<Button variant='info' onClick={handleShow}>
+									排行榜
+								</Button>
+								<Ranking
+									show={show}
+									rankingData={rankingData}
+									handleClose={handleClose}
+								/>{' '}
+							</>
+						) : (
+							''
+						)}
+						<a
+							href={`https://wa.me/85263520220/?text=練習${title}裡面的答案或問題有錯誤的地方`}
+							target='_blank'
+						>
+							<Button variant='warning'>題目/答案有問題</Button>
+						</a>
+					</div>
 
 					{/* Table */}
 					<Table striped bordered hover>
