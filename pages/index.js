@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { API_URL } from '@/config/index';
 import ExerciseCard from '@/components/ExerciseCard';
+import Link from 'next/link';
 
 // Fetching data
 export async function getServerSideProps() {
@@ -57,7 +58,21 @@ export default function HomePage({ readings, writings }) {
 					<Col md={4} className='px-4 py-3'>
 						<h3>線上英文練習</h3>
 						<p>
-							一個為學生而設的線上英文練習網站。目前平台仍在起步階段，所有練習會免費開放，而且會持續加入更多練習，如果你想支持這個平台的發展同埋保持免費開放的狀態，可以考慮成為我的Pateron
+							一個為學生而設的線上英文練習網站。目前平台仍在起步階段，所有練習會免費開放，而且會持續加入更多練習，如果你想支持這個平台的發展同埋保持免費開放的狀態，可以考慮在
+							<a
+								href='https://wa.me/85263520220/?text=我想支持你的網站發展'
+								target='_blank'
+							>
+								WhatsApp
+							</a>
+							或者
+							<a
+								href='https://www.instagram.com/louis_tkw'
+								target='_blank'
+							>
+								Instagram
+							</a>
+							上聯絡我
 						</p>
 					</Col>
 					<Col md={4} className='px-4 py-3'>
@@ -70,7 +85,7 @@ export default function HomePage({ readings, writings }) {
 					<Col md={4} className='px-4 py-3'>
 						<h3>記錄學習進度</h3>
 						<p>
-							只要你登記做會員，就可以記錄你已完成的練習同分數，讓你可以知到自己的學習進度和情況，幫你更有系統地去安排你的學習。註冊成為會員是免費的，你只需要提供電郵即可註冊，過程只需大約3分鐘
+							只要你登記做會員，就可以記錄你已完成的練習同分數，讓你可以知到自己的學習進度和情況，幫你更有系統地去安排你的學習。註冊成為會員是免費的，你只需要提供電郵即可註冊
 						</p>
 					</Col>
 				</Row>
