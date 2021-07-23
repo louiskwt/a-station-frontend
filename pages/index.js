@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { API_URL } from '@/config/index';
 import ExerciseCard from '@/components/ExerciseCard';
-import Link from 'next/link';
 
 // Fetching data
 export async function getServerSideProps() {

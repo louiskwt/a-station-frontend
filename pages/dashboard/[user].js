@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Layout from '@/components/Layout';
 import RecordTable from '@/components/RecordTable';
 import Container from 'react-bootstrap/Container';
