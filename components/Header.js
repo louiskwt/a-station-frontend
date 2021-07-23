@@ -47,15 +47,12 @@ export default function Header() {
 								Writing
 							</span>
 						</Link>
-						{user && user.type !== 'guest' ? (
-							<Link href='/paidarea'>
-								<span className='nav-link' role='button'>
-									教學影片
-								</span>
-							</Link>
-						) : (
-							''
-						)}
+
+						<Link href='/courses'>
+							<span className='nav-link' role='button'>
+								付費課程
+							</span>
+						</Link>
 					</Nav>
 					<Nav>
 						{user && user.type !== 'guest' ? (

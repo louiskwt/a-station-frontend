@@ -27,7 +27,7 @@ import Container from 'react-bootstrap/Container';
 // 	}
 // }
 
-export default function ReadingPage() {
+export default function CoursesPage() {
 	// pagination
 
 	return (
