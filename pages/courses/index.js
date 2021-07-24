@@ -1,5 +1,7 @@
+import CourseCard from '@/components/CourseCard';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 // export async function getServerSideProps({ query: { page = 1 } }) {
 // 	// Calculate start page
@@ -31,8 +33,12 @@ export default function CoursesPage() {
 	// pagination
 
 	return (
-		<Layout title='Online Courses | a-station'>
-			<Container></Container>
+		<Layout title='線上課程 | a-station'>
+			<Container className='mt-5'>
+				<Row className='d-flex justify-content-around'>
+					<CourseCard />
+				</Row>
+			</Container>
 		</Layout>
 	);
 }
