@@ -1,36 +1,33 @@
 import CourseCard from '@/components/CourseCard';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
+import { API_URL } from '@/config/index';
 
-// export async function getServerSideProps({ query: { page = 1 } }) {
-// 	// Calculate start page
-// 	const start = +page === 1 ? 0 : (+page - 1) * 3;
-// 	try {
-// 		// Fetch total/count
-// 		const totalRes = await fetch(`${API_URL}/readings/count`);
+export async function getServerSideProps() {
+	try {
+		// Fetch total/count
+		// const totalRes = await fetch(`${API_URL}/readings/count`);
 
-// 		const total = await totalRes.json();
+		// const total = await totalRes.json();
 
-// 		// Fetch exercises
-// 		const exerciseRes = await fetch(
-// 			`${API_URL}/readings?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
-// 		);
-// 		const readings = await exerciseRes.json();
+		// Fetch exercises
+		const courseRes = await fetch(`${API_URL}/courses`);
+		const courses = await courseRes.json();
 
-// 		return {
-// 			props: { readings, page: +page, total }
-// 		};
-// 	} catch (error) {
-// 		console.log(error);
-// 		return {
-// 			notFound: true
-// 		};
-// 	}
-// }
+		return {
+			props: { courses }
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			notFound: true
+		};
+	}
+}
 
-export default function CoursesPage() {
+export default function CoursesPage({ courses }) {
 	// pagination
-
+	console.log(courses);
 	return (
 		<Layout title='線上課程 | a-station'>
 			<Container className='mt-5'>
