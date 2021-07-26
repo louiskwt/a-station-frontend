@@ -31,7 +31,13 @@ export default function CoursesPage({ courses }) {
 	return (
 		<Layout title='線上課程 | a-station'>
 			<Container className='mt-5'>
-				<CourseCard />
+				{courses.map((course) => (
+					<CourseCard
+						course={course}
+						key={course.id}
+						className='w-100'
+					/>
+				))}
 			</Container>
 		</Layout>
 	);
