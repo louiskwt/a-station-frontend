@@ -35,7 +35,7 @@ export default function CoursesPage({ courses }) {
 					<CourseCard
 						course={course}
 						key={course.id}
-						className='w-100'
+						className='w-80'
 					/>
 				))}
 			</Container>

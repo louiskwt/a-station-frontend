@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner';
 import styles from '@/styles/ExerciseCard.module.css';
@@ -16,9 +15,7 @@ export default function CourseCard({ course }) {
 					{course.title}
 				</Card.Header>
 				<Card.Body className={styles.tag}>
-					<Card.Title>{course.description} </Card.Title>
-
-					<Card.Text className='mt-3'>
+					<Card.Text>
 						課程重點：{' '}
 						<ul className='pl-5 mt-3'>
 							{course.highlights.details.map((detail, index) => (
@@ -27,14 +24,12 @@ export default function CourseCard({ course }) {
 						</ul>
 					</Card.Text>
 					{user.membership === 'Free' && (
-						<Link href={`/${course.title}`}>
-							<a
-								className='btn btn-primary disabled'
-								onClick={() => setLoading(true)}
-							>
-								只限VIP學生
-							</a>
-						</Link>
+						<a
+							className='btn btn-primary disabled'
+							onClick={() => setLoading(true)}
+						>
+							只限VIP學生
+						</a>
 					)}
 					{user.membership === 'VIP Plus' && (
 						<Link href={`/${course.title}`}>
