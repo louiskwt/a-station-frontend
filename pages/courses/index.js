@@ -25,7 +25,7 @@ export async function getServerSideProps() {
 	}
 }
 
-export default function CoursesPage({ courses }) {
+export default function CourseIndexPage({ courses }) {
 	// pagination
 	console.log(courses);
 	return (
