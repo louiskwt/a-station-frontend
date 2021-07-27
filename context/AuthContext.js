@@ -125,10 +125,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const checkVIP = (user) => {
-		if (user.membership !== 'VIP Plus') {
-			setText('只限VIP Plus會員');
-			router.push('/404');
-		}
+		return user.membership === 'VIP Plus';
 	};
 
 	// Forgot password
