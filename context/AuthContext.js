@@ -117,9 +117,16 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	// Authenticate membership type
-	const checkMembership = async (user) => {
-		if (user.membership !== 'VIP' || user.membership !== 'VIP Plus') {
+	const checkMembership = (user) => {
+		if (user.membership !== 'VIP') {
 			setText('只限VIP會員');
+			router.push('/404');
+		}
+	};
+
+	const checkVIP = (user) => {
+		if (user.membership !== 'VIP Plus') {
+			setText('只限VIP Plus會員');
 			router.push('/404');
 		}
 	};
@@ -195,7 +202,8 @@ export const AuthProvider = ({ children }) => {
 				text,
 				setText,
 				forgotPassword,
-				resetPassword
+				resetPassword,
+				checkVIP
 			}}
 		>
 			{children}

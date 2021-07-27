@@ -23,9 +23,10 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function CoursePage({ course }) {
-	const { user, checkMembership } = useContext(AuthContext);
+	const { user, checkVIP } = useContext(AuthContext);
 
-	checkMembership(user);
+	checkVIP(user);
+
 	return (
 		<Layout>
 			<Container className='mt-3'>

@@ -32,7 +32,7 @@ export default function CourseCard({ course }) {
 						</a>
 					)}
 					{user.membership === 'VIP Plus' && (
-						<Link href={`/${course.slug}`}>
+						<Link href={`/courses/${course.slug}`}>
 							<a
 								className='btn btn-primary'
 								onClick={() => setLoading(true)}
