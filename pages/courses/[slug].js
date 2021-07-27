@@ -1,6 +1,8 @@
 import { API_URL } from '@/config/index';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
+import { useContext } from 'react';
+import AuthContext from '@/context/AuthContext';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
@@ -21,7 +23,9 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function CoursePage({ course }) {
-	console.log(course);
+	const { user, checkMembership } = useContext(AuthContext);
+
+	checkMembership(user);
 	return (
 		<Layout>
 			<Container className='mt-3'>

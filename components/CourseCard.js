@@ -23,14 +23,15 @@ export default function CourseCard({ course }) {
 							))}
 						</ul>
 					</Card.Text>
-					{user.membership === 'Free' && (
-						<a
-							className='btn btn-primary disabled'
-							onClick={() => setLoading(true)}
-						>
-							只限VIP學生
-						</a>
-					)}
+					{user.membership === 'Free' ||
+						(user.membership === 'VIP' && (
+							<a
+								className='btn btn-primary disabled'
+								onClick={() => setLoading(true)}
+							>
+								只限VIP Plus學生
+							</a>
+						))}
 					{user.membership === 'VIP Plus' && (
 						<Link href={`/${course.slug}`}>
 							<a

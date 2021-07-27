@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
 
 	// Authenticate membership type
 	const checkMembership = async (user) => {
-		if (user.membership !== 'VIP') {
+		if (user.membership !== 'VIP' || user.membership !== 'VIP Plus') {
 			setText('只限VIP會員');
 			router.push('/404');
 		}
