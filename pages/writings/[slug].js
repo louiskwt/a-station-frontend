@@ -34,10 +34,6 @@ export default function WritingExPage({ ex, slug }) {
 
 	const { user, checkMembership } = useContext(AuthContext);
 
-	if (ex.premium === true) {
-		checkMembership(user);
-	}
-
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
@@ -49,57 +45,130 @@ export default function WritingExPage({ ex, slug }) {
 		};
 	}, []);
 
-	return (
-		<Layout title={ex.title}>
-			{ex.premium && user.membership !== 'VIP' ? (
-				<></>
-			) : (
-				<>
-					<Container>
-						<h2 className='mt-3'>{ex.title}</h2>
+	if (ex.premium === true && checkMembership(user)) {
+		return (
+			<Layout title={ex.title}>
+				{ex.premium && user.membership !== 'VIP' ? (
+					<></>
+				) : (
+					<>
+						<Container>
+							<h2 className='mt-3'>{ex.title}</h2>
+							<br />
+							<br />
+							<div className='text-center'>
+								<Image
+									src={ex.cover.formats.small.url}
+									alt='cover'
+									width={ex.cover.formats.small.width}
+									height={ex.cover.formats.small.height}
+								/>
+							</div>
+							<br />
+							{ex.mc ? (
+								<MCPanel
+									questions={ex.questions}
+									answers={ex.answers}
+									startingTime={startingTime}
+									slug={slug}
+								/>
+							) : (
+								<SAPanel
+									questions={ex.questions}
+									answers={ex.answers}
+									startingTime={startingTime}
+									slug={slug}
+								/>
+							)}
+						</Container>
 						<br />
 						<br />
-						<div className='text-center'>
-							<Image
-								src={ex.cover.formats.small.url}
-								alt='cover'
-								width={ex.cover.formats.small.width}
-								height={ex.cover.formats.small.height}
-							/>
-						</div>
-						<br />
-						{ex.mc ? (
-							<MCPanel
-								questions={ex.questions}
-								answers={ex.answers}
-								startingTime={startingTime}
-								slug={slug}
-							/>
-						) : (
-							<SAPanel
-								questions={ex.questions}
-								answers={ex.answers}
-								startingTime={startingTime}
-								slug={slug}
-							/>
-						)}
-					</Container>
-					<br />
-					<br />
-					<div className='d-flex justify-content-between mt-5'>
-						<Link href='/readings'>
-							<Button variant='light'>Back</Button>
-						</Link>
+						<div className='d-flex justify-content-between mt-5'>
+							<Link href='/readings'>
+								<Button variant='light'>Back</Button>
+							</Link>
 
-						<a
-							href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
-							target='_blank'
-						>
-							<Button variant='warning'>題目/答案有問題</Button>
-						</a>
-					</div>
-				</>
-			)}
-		</Layout>
-	);
+							<a
+								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
+								target='_blank'
+							>
+								<Button variant='warning'>
+									題目/答案有問題
+								</Button>
+							</a>
+						</div>
+					</>
+				)}
+			</Layout>
+		);
+	} else if (ex.premium === false) {
+		return (
+			<Layout title={ex.title}>
+				{ex.premium && user.membership !== 'VIP' ? (
+					<></>
+				) : (
+					<>
+						<Container>
+							<h2 className='mt-3'>{ex.title}</h2>
+							<br />
+							<br />
+							<div className='text-center'>
+								<Image
+									src={ex.cover.formats.small.url}
+									alt='cover'
+									width={ex.cover.formats.small.width}
+									height={ex.cover.formats.small.height}
+								/>
+							</div>
+							<br />
+							{ex.mc ? (
+								<MCPanel
+									questions={ex.questions}
+									answers={ex.answers}
+									startingTime={startingTime}
+									slug={slug}
+								/>
+							) : (
+								<SAPanel
+									questions={ex.questions}
+									answers={ex.answers}
+									startingTime={startingTime}
+									slug={slug}
+								/>
+							)}
+						</Container>
+						<br />
+						<br />
+						<div className='d-flex justify-content-between mt-5'>
+							<Link href='/readings'>
+								<Button variant='light'>Back</Button>
+							</Link>
+
+							<a
+								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
+								target='_blank'
+							>
+								<Button variant='warning'>
+									題目/答案有問題
+								</Button>
+							</a>
+						</div>
+					</>
+				)}
+			</Layout>
+		);
+	} else {
+		return (
+			<Layout>
+				<Container className='mt-3 text-center'>
+					<h2>只限VIP！</h2>
+					<Link href={'/'}>
+						<Button className='mt-5' variant='secondary'>
+							返回主頁
+						</Button>
+					</Link>
+				</Container>
+			</Layout>
+		);
+	}
 }
