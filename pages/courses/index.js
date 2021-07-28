@@ -27,10 +27,26 @@ export async function getServerSideProps() {
 
 export default function CourseIndexPage({ courses }) {
 	// pagination
-	console.log(courses);
 	return (
 		<Layout title='線上課程 | a-station'>
-			<Container className='mt-5'>
+			<Container className='mt-5 tex-center'>
+				<h5>
+					如想成為VIP Plus學生，可以
+					<a
+						href='https://wa.me/85263520220/?text=我想成為VIP Plus學生'
+						target='_blank'
+					>
+						按此
+					</a>
+					聯絡我或者點擊
+					<a
+						href='https://docs.google.com/forms/u/0/'
+						target='_blank'
+					>
+						連結
+					</a>
+					去申請
+				</h5>
 				{courses.map((course) => (
 					<CourseCard
 						course={course}
