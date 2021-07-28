@@ -53,11 +53,7 @@ export default function ReadingPage({ readings, page, total }) {
 				<hr></hr>
 
 				{readings.map((exercise) => (
-					<ExerciseCard
-						exercise={exercise}
-						key={exercise.id}
-						className='w-100'
-					/>
+					<ExerciseCard exercise={exercise} key={exercise.id} />
 				))}
 			</Container>
 			<br />

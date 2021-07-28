@@ -48,11 +48,7 @@ export default function CourseIndexPage({ courses }) {
 					去申請
 				</h5>
 				{courses.map((course) => (
-					<CourseCard
-						course={course}
-						key={course.id}
-						className='w-80'
-					/>
+					<CourseCard course={course} key={course.id} />
 				))}
 			</Container>
 		</Layout>
