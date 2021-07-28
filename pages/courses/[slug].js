@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import { useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
+import Link from 'next/link';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
@@ -51,9 +52,11 @@ export default function CoursePage({ course }) {
 			<Layout>
 				<Container className='mt-3 text-center'>
 					<h2>只限VIP Plus會員！</h2>
-					<Button className='mt-5' variant='secondary'>
-						返回主頁
-					</Button>
+					<Link href={'/'}>
+						<Button className='mt-5' variant='secondary'>
+							返回主頁
+						</Button>
+					</Link>
 				</Container>
 			</Layout>
 		);
