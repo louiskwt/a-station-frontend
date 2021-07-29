@@ -33,14 +33,14 @@ export default function CourseIndexPage({ courses }) {
 				<h5>
 					如想成為VIP Plus學生，可以
 					<a
-						href='https://wa.me/85263520220/?text=我想成為VIP Plus學生'
+						href='https://wa.me/85263520220/?text=我想成為VIP%20Plus學生'
 						target='_blank'
 					>
 						按此
 					</a>
 					聯絡我或者點擊
 					<a
-						href='https://docs.google.com/forms/u/0/'
+						href='https://forms.gle/G1HSjCxamVvgbQaZ7'
 						target='_blank'
 					>
 						連結
