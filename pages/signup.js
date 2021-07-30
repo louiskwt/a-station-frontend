@@ -47,7 +47,7 @@ export default function SignUpPage() {
 	};
 
 	return (
-		<Layout>
+		<Layout title='註冊加入A-Station'>
 			<ToastContainer />
 			<Container>
 				<h2 className='text-center mt-5'>註冊新帳户</h2>

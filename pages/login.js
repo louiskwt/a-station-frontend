@@ -30,7 +30,7 @@ export default function LoginPage() {
 	};
 
 	return (
-		<Layout>
+		<Layout title='登入A-Station'>
 			<Container>
 				<h2 className='text-center mt-5'>登入 A-Station</h2>
 				<Form onSubmit={handleSubmit}>
