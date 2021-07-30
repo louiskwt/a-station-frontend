@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
 	const [message, setMessage] = useState(null);
 	const [status, setStatus] = useState(null);
 	const [loading, setLoading] = useState(false);
-	const [text, setText] = useState('');
 
 	// Presisting user with ussEffect
 	useEffect(() => checkUserLoggedIn(), []);
@@ -111,9 +110,6 @@ export const AuthProvider = ({ children }) => {
 		} else {
 			setUser({ type: 'guest', membership: 'Free' });
 		}
-		if (text) {
-			setText('');
-		}
 	};
 
 	// Authenticate membership type
@@ -193,8 +189,6 @@ export const AuthProvider = ({ children }) => {
 				loading,
 				setLoading,
 				checkMembership,
-				text,
-				setText,
 				forgotPassword,
 				resetPassword,
 				checkVIP
