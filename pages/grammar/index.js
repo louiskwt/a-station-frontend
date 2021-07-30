@@ -36,10 +36,10 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
 export default function writing({ writings, page, total }) {
 	const tags = ['gerund/to-infinitive', 'present tense', 'past tense'];
-	const type = 'writings';
+	const type = 'grammar';
 
 	return (
-		<Layout title='Writing Exercises | a-station'>
+		<Layout title='Grammar Exercises | a-station'>
 			<Container>
 				<Row>
 					<Col>

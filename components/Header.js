@@ -42,7 +42,7 @@ export default function Header() {
 								Reading
 							</span>
 						</Link>
-						<Link href='/writings' className='nav-link'>
+						<Link href='/grammar' className='nav-link'>
 							<span className='nav-link' role='button'>
 								Grammar
 							</span>
