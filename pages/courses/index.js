@@ -2,20 +2,26 @@ import CourseCard from '@/components/CourseCard';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
 import { API_URL } from '@/config/index';
+import PaginationList from '@/components/PaginationList';
+const PER_PAGE = 3;
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query: { page = 1 } }) {
+	// Calculate start page
+	const start = +page === 1 ? 0 : (+page - 1) * 3;
 	try {
 		// Fetch total/count
-		// const totalRes = await fetch(`${API_URL}/readings/count`);
+		const totalRes = await fetch(`${API_URL}/courses/count`);
 
-		// const total = await totalRes.json();
+		const total = await totalRes.json();
 
 		// Fetch exercises
-		const courseRes = await fetch(`${API_URL}/courses`);
+		const courseRes = await fetch(
+			`${API_URL}/courses?_limit=${PER_PAGE}&_start=${start}`
+		);
 		const courses = await courseRes.json();
 
 		return {
-			props: { courses }
+			props: { courses, page: +page, total }
 		};
 	} catch (error) {
 		console.log(error);
@@ -25,7 +31,7 @@ export async function getServerSideProps() {
 	}
 }
 
-export default function CourseIndexPage({ courses }) {
+export default function CourseIndexPage({ courses, page, total }) {
 	// pagination
 	return (
 		<Layout title='線上課程 | a-station'>
@@ -47,10 +53,15 @@ export default function CourseIndexPage({ courses }) {
 					</a>
 					去申請
 				</h5>
-				{courses.map((course) => (
-					<CourseCard course={course} key={course.id} />
-				))}
+				{courses &&
+					courses.map((course) => (
+						<CourseCard course={course} key={course.id} />
+					))}
 			</Container>
+			<br />
+			{total > PER_PAGE && (
+				<PaginationList total={total} PER_PAGE={PER_PAGE} page={page} />
+			)}
 		</Layout>
 	);
 }
