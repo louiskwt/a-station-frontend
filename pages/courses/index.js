@@ -60,7 +60,12 @@ export default function CourseIndexPage({ courses, page, total }) {
 			</Container>
 			<br />
 			{total > PER_PAGE && (
-				<PaginationList total={total} PER_PAGE={PER_PAGE} page={page} />
+				<PaginationList
+					total={total}
+					PER_PAGE={PER_PAGE}
+					page={page}
+					type='courses'
+				/>
 			)}
 		</Layout>
 	);
