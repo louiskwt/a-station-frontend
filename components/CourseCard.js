@@ -15,14 +15,12 @@ export default function CourseCard({ course }) {
 					{course.title}
 				</Card.Header>
 				<Card.Body className={styles.tag}>
-					<Card.Text>
-						課程重點：{' '}
-						<ul className='pl-5 mt-3'>
-							{course.highlights.details.map((detail, index) => (
-								<li key={index}>{detail}</li>
-							))}
-						</ul>
-					</Card.Text>
+					<Card.Text>課程重點： </Card.Text>
+					<ul className='pl-5 mt-3'>
+						{course.highlights.details.map((detail, index) => (
+							<li key={index}>{detail}</li>
+						))}
+					</ul>
 					{user.membership !== 'VIP Plus' && (
 						<a
 							className='btn btn-primary disabled'
