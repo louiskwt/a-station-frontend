@@ -23,7 +23,6 @@ export async function getServerSideProps({ query: { tag } }) {
 }
 
 export default function WritingFilterPage({ ex }) {
-	console.log(ex);
 	const router = useRouter();
 	return (
 		<Layout>

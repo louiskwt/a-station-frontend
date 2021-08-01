@@ -7,7 +7,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 
 export async function getServerSideProps({ query: { code } }) {
-	console.log(code);
 	try {
 		if (!code) {
 			throw 'Not Found';

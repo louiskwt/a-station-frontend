@@ -36,7 +36,6 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 
 export default function ReadingPage({ readings, page, total }) {
 	// pagination
-
 	const tags = ['opposite meaning', 'similar meaning', 'T/F/NG'];
 	const type = 'readings';
 	return (
