@@ -21,10 +21,10 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 			`${API_URL}/writings?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
 		);
 
-		const writings = await exerciseRes.json();
+		const grammarEx = await exerciseRes.json();
 
 		return {
-			props: { writings, page: +page, total }
+			props: { grammarEx, page: +page, total }
 		};
 	} catch (error) {
 		console.error(error);
@@ -34,7 +34,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 	}
 }
 
-export default function writing({ writings, page, total }) {
+export default function Grammar({ grammarEx, page, total }) {
 	const tags = ['gerund/to-infinitive', 'present tense', 'past tense'];
 	const type = 'grammar';
 
@@ -50,7 +50,7 @@ export default function writing({ writings, page, total }) {
 					</Col>
 				</Row>
 				<hr></hr>
-				{writings.map((exercise) => (
+				{grammarEx.map((exercise) => (
 					<ExerciseCard exercise={exercise} key={exercise.id} />
 				))}
 			</Container>
