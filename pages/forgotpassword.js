@@ -22,7 +22,7 @@ export default function ForgotPasswordPage() {
 		forgotPassword(email);
 	};
 	return (
-		<Layout>
+		<Layout title='忘記密碼 | A-station'>
 			<Container>
 				<h2 className='text-center mt-5'>忘記密碼?</h2>
 				<h5 className='text-center mt-5'>請輸入你註冊時使用的email</h5>

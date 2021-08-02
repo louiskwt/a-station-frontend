@@ -46,7 +46,7 @@ export default function ResetPasswordPage({ code }) {
 		}
 	};
 	return (
-		<Layout>
+		<Layout title='重設密碼 | A-station'>
 			<Container>
 				<h2 className='text-center mt-5'>重設密碼</h2>
 
