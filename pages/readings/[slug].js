@@ -118,14 +118,14 @@ export default function ReadingExPage({ ex, slug }) {
 							<h2 className='mt-3'>{ex.title}</h2>
 							<br />
 							<br />
-							<div className='text-center'>
+							{/* <div className='text-center'>
 								<Image
 									src={ex.cover.formats.small.url}
 									alt='cover'
 									width={ex.cover.formats.small.width}
 									height={ex.cover.formats.small.height}
 								/>
-							</div>
+							</div> */}
 							<br />
 							<Passage text={ex.passage} title={ex.title} />
 
