@@ -119,7 +119,7 @@ export default function ScorePage({ token, rankingData }) {
 	const handleShow = () => setShow(true);
 
 	return (
-		<Layout title={'Your Score'}>
+		<Layout title={'你的成續 ｜A-station'}>
 			<ToastContainer />
 			{scoringData.length === 0 ? (
 				''
