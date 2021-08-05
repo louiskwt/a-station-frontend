@@ -32,12 +32,12 @@ export const AuthProvider = ({ children }) => {
 			setUser(data.user);
 			setStatus('success');
 			setMessage('註冊成功！歡迎來到A-station～');
+			setMessage(null);
 			setTimeout(() => {
 				router.push('/');
 				setStatus(null);
-				setMessage(null);
 				setLoading(false);
-			}, 2000);
+			}, 1000);
 		} else {
 			setStatus('fail');
 			setLoading(false);
