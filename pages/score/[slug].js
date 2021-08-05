@@ -16,6 +16,7 @@ import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ req, query: { slug } }) {
 	const { token } = parseCookies(req);
+	// console.log(token);
 
 	if (token) {
 		try {
