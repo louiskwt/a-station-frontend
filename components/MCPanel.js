@@ -103,8 +103,8 @@ export default function AnswerPanel({
 				<h5>{instruction}</h5>
 				{questionArr &&
 					questionArr.map((data, index) => (
-						<Form.Group key={data.question}>
-							<Form.Label>
+						<Form.Group key={data.question} className='mb-4'>
+							<Form.Label className='mb-2'>
 								Q{index + 1}: {data.question}
 							</Form.Label>
 							<br />
