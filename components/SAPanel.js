@@ -74,6 +74,7 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 								name={`q${index + 1}`}
 								type='text'
 								placeholder='Write your answer here'
+								autoComplete='off'
 							/>
 						</Col>
 					</Form.Group>
