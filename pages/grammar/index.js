@@ -34,7 +34,12 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 }
 
 export default function Grammar({ grammarEx, page, total }) {
-	const tags = ['gerund/to-infinitive', 'present tense', 'past tense'];
+	const tags = [
+		'gerund / to-infinitive',
+		'present tense',
+		'past tense',
+		'preposition'
+	];
 	const type = 'grammar';
 
 	return (

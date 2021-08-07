@@ -37,7 +37,7 @@ export default function WritingFilterPage({ ex }) {
 				))}
 				<br />
 
-				<Link href='/writings'>
+				<Link href='/grammar'>
 					<a className='mt-5 btn btn-warning'>Clear Filter Result</a>
 				</Link>
 			</Container>
