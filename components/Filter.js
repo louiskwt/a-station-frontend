@@ -10,7 +10,7 @@ export default function Filter({ tags, type }) {
 	return (
 		<Form className='mt-5' onChange={handleChange}>
 			<Form.Control as='select'>
-				<option>題型分類</option>
+				<option>題型篩選</option>
 				{tags.map((tag) => (
 					<option value={tag} key={tag}>
 						{tag}

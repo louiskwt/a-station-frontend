@@ -30,7 +30,7 @@ export default function ReadingFilterPage({ ex }) {
 	return (
 		<Layout>
 			<Container>
-				<h3 className='mt-5'>Filter result for: {router.query.tag}</h3>
+				<h3 className='mt-5'>篩選條件: {router.query.tag}</h3>
 
 				{ex.map((exercise) => (
 					<ExerciseCard
@@ -43,7 +43,7 @@ export default function ReadingFilterPage({ ex }) {
 				<br />
 
 				<Link href='/readings'>
-					<a className='mt-5 btn btn-warning'>Clear Filter Result</a>
+					<a className='mt-5 btn btn-warning'>清除篩選結果</a>
 				</Link>
 			</Container>
 		</Layout>
