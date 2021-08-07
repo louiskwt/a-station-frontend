@@ -1,9 +1,8 @@
 import CourseCard from '@/components/CourseCard';
 import Layout from '@/components/Layout';
 import Container from 'react-bootstrap/Container';
-import { API_URL } from '@/config/index';
+import { API_URL, PER_PAGE } from '@/config/index';
 import PaginationList from '@/components/PaginationList';
-const PER_PAGE = 3;
 
 export async function getServerSideProps({ query: { page = 1 } }) {
 	// Calculate start page

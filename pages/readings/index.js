@@ -4,9 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filter from '@/components/Filter';
 import ExerciseCard from '@/components/ExerciseCard';
-import { API_URL } from '@/config/index';
+import { API_URL, PER_PAGE } from '@/config/index';
 import PaginationList from '@/components/PaginationList';
-const PER_PAGE = 3;
 
 export async function getServerSideProps({ query: { page = 1 } }) {
 	// Calculate start page
