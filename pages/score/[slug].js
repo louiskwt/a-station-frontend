@@ -99,7 +99,7 @@ export default function ScorePage({ token, rankingData }) {
 		});
 
 		if (!res.ok) {
-			toast.warning('噢～儲存失敗，請重試', {
+			toast.warning('噢～儲存失敗，請重新登入後再試一次', {
 				position: 'top-center',
 				autoClose: 3000
 			});
