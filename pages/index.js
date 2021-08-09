@@ -77,8 +77,8 @@ export default function HomePage({ readings, writings }) {
 					<Col md={4} className='px-4 py-3'>
 						<h3>針對性練習</h3>
 						<p>
-							現時本站提供Reading 同
-							Writing嘅練習。所有練習都是集中針對某一項題型，讓你可以專注去改善你的弱點同強化你專長的題型。更多新的練習仍然在開發，日後會加入更多練習，敬請期待
+							現時本站提供Reading 和
+							Grammar的練習。所有練習都是集中針對某一項題型，讓你可以專注去改善你的弱點同強化你專長的題型。更多新的練習仍然在開發，日後會加入更多練習，敬請期待
 						</p>
 					</Col>
 					<Col md={4} className='px-4 py-3'>
