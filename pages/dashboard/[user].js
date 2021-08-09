@@ -26,7 +26,7 @@ export async function getServerSideProps({ query: { user } }) {
 export default function DashboardPage({ record }) {
 	const { user } = useContext(AuthContext);
 	return (
-		<Layout>
+		<Layout title={`${user.username} ｜A-station`}>
 			<Container>
 				{user.type !== 'guest' && (
 					<>
