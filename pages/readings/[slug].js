@@ -58,7 +58,6 @@ export default function ReadingExPage({ ex, slug }) {
 						<Container>
 							<h2 className='mt-3'>{ex.title}</h2>
 							<br />
-							<br />
 							<div className='text-center'>
 								<Image
 									src={ex.cover.formats.small.url}
