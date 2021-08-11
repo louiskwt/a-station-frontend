@@ -27,7 +27,7 @@ export default function WritingFilterPage({ ex }) {
 	return (
 		<Layout>
 			<Container>
-				<h3 className='mt-5'>篩選條件:: {router.query.tag}</h3>
+				<h3 className='mt-5'>篩選條件: {router.query.tag}</h3>
 				{ex.map((exercise) => (
 					<ExerciseCard
 						exercise={exercise}
