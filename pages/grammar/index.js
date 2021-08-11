@@ -38,7 +38,8 @@ export default function Grammar({ grammarEx, page, total }) {
 		'gerund / to-infinitive',
 		'present tense',
 		'past tense',
-		'preposition'
+		'preposition',
+		'conditional'
 	];
 	const type = 'grammar';
 
