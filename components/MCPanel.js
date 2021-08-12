@@ -104,13 +104,14 @@ export default function AnswerPanel({
 				{questionArr &&
 					questionArr.map((data, index) => (
 						<Form.Group key={data.question} className='mb-4'>
-							<Form.Label className='mb-2'>
+							<Form.Label className='mb-3'>
 								Q{index + 1}: {data.question}
 							</Form.Label>
 							<br />
 							{data.options.map((option) => (
 								<Form.Check
 									inline
+									className='mb-3 mr-3'
 									name={`q${index + 1}`}
 									type='radio'
 									label={option}
