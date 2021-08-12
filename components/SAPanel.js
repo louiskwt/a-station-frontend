@@ -79,8 +79,13 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 						</Col>
 					</Form.Group>
 				))}
-
-				<Button variant='success' type='submit' ref={btnEl}>
+				<br />
+				<Button
+					className='mt-3 btn-lg btn-block'
+					variant='success'
+					type='submit'
+					ref={btnEl}
+				>
 					Submit
 				</Button>
 			</Form>

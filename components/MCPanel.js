@@ -122,7 +122,13 @@ export default function AnswerPanel({
 						</Form.Group>
 					))}
 
-				<Button variant='success' type='submit' ref={btnEl}>
+				<br />
+				<Button
+					variant='success'
+					className='mt-3 btn-lg btn-block'
+					type='submit'
+					ref={btnEl}
+				>
 					Submit
 				</Button>
 			</Form>
