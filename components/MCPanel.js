@@ -100,7 +100,7 @@ export default function AnswerPanel({
 		<div className='mt-4 col-10 offset-1'>
 			<ToastContainer />
 			<Form onSubmit={handleSubmit}>
-				<h5>{instruction}</h5>
+				<h5 className='mb-4'>{instruction}</h5>
 				{questionArr &&
 					questionArr.map((data, index) => (
 						<Form.Group key={data.question} className='mb-4'>
