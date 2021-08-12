@@ -8,7 +8,7 @@ export default async (req, res) => {
 			cookie.serialize('token', '', {
 				httpOnly: true,
 				secure: process.env.NODE_ENV !== 'development',
-				maxAge: new Date(0), // 1 month
+				expires: new Date(0), // 1 month
 				sameSite: 'strict',
 				path: '/'
 			})
