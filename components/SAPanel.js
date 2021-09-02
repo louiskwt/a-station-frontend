@@ -37,7 +37,7 @@ export default function SAPanel({ questions, answers, startingTime, slug }) {
 				return;
 			}
 
-			scoringArr.push({ response: input, answer: ans[i] });
+			scoringArr.push({ response: input.toLowerCase(), answer: ans[i] });
 		}
 
 		setScoringData(scoringArr);
