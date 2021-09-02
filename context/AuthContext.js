@@ -29,12 +29,11 @@ export const AuthProvider = ({ children }) => {
 		const data = await res.json();
 
 		if (res.ok) {
-			setUser(data.user);
 			setStatus('success');
-			setMessage('註冊成功！歡迎來到A-station～');
+			setMessage('歡迎加入A-station～ 請立即登入');
 			setMessage(null);
 			setTimeout(() => {
-				router.push('/');
+				router.push('/login');
 				setStatus(null);
 				setLoading(false);
 			}, 1000);
