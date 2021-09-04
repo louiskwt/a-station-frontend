@@ -39,7 +39,8 @@ export default function Grammar({ grammarEx, page, total }) {
 		'present tense',
 		'past tense',
 		'preposition',
-		'conditional'
+		'conditional',
+		'passive voice'
 	];
 	const type = 'grammar';
 
