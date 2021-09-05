@@ -34,7 +34,7 @@ export default function Ranking({ show, rankingData, handleClose }) {
 						</tbody>
 					</Table>
 				) : (
-					'還未有排名，馬上儲存成績去成為第一位啦！'
+					'還未有排名，馬上做練習去成為第一位啦！'
 				)}
 			</Modal.Body>
 		</Modal>

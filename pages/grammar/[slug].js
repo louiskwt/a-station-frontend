@@ -9,14 +9,21 @@ import SAPanel from '@/components/SAPanel';
 import MCPanel from '@/components/MCPanel';
 import AuthContext from '@/context/AuthContext';
 import ScoreContext from '@/context/ScoreContext';
+import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
+		// Fetching Exercise
 		const res = await fetch(`${API_URL}/writings?slug=${slug}`);
 		const ex = await res.json();
+		// Fetching Ranking Data
+		const rankingRes = await fetch(`${API_URL}/records?title=${slug}`);
+		const rankingData = await rankingRes.json();
+
 		return {
 			props: {
 				ex: ex[0],
+				rankingData,
 				slug
 			}
 		};
@@ -28,7 +35,8 @@ export async function getServerSideProps({ query: { slug } }) {
 	}
 }
 
-export default function WritingExPage({ ex, slug }) {
+export default function WritingExPage({ ex, rankingData, slug }) {
+	console.log(rankingData);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
@@ -44,6 +52,12 @@ export default function WritingExPage({ ex, slug }) {
 			mounted = false;
 		};
 	}, []);
+
+	// Modal
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	if (ex.premium === true && checkMembership(user)) {
 		return (
@@ -87,7 +101,6 @@ export default function WritingExPage({ ex, slug }) {
 							<Link href='/readings'>
 								<Button variant='light'>Back</Button>
 							</Link>
-
 							<a
 								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
 								target='_blank'
@@ -96,6 +109,14 @@ export default function WritingExPage({ ex, slug }) {
 									題目/答案有問題
 								</Button>
 							</a>
+							<Button variant='info' onClick={handleShow}>
+								排行榜
+							</Button>
+							<Ranking
+								show={show}
+								rankingData={rankingData}
+								handleClose={handleClose}
+							/>{' '}
 						</div>
 					</>
 				)}
@@ -143,7 +164,6 @@ export default function WritingExPage({ ex, slug }) {
 							<Link href='/readings'>
 								<Button variant='light'>Back</Button>
 							</Link>
-
 							<a
 								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
 								target='_blank'
@@ -152,6 +172,14 @@ export default function WritingExPage({ ex, slug }) {
 									題目/答案有問題
 								</Button>
 							</a>
+							<Button variant='info' onClick={handleShow}>
+								排行榜
+							</Button>
+							<Ranking
+								show={show}
+								rankingData={rankingData}
+								handleClose={handleClose}
+							/>{' '}
 						</div>
 					</>
 				)}
