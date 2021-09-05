@@ -6,18 +6,25 @@ import Container from 'react-bootstrap/Container';
 import Passage from '@/components/Passage';
 import MCPanel from '@/components/MCPanel';
 import SAPanel from '@/components/SAPanel';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
 import ScoreContext from '@/context/ScoreContext';
+import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ query: { slug } }) {
 	try {
+		// fetch EX
 		const res = await fetch(`${API_URL}/readings?slug=${slug}`);
 		const ex = await res.json();
+
+		// fetch ranking
+		const rankingRes = await fetch(`${API_URL}/records?title=${slug}`);
+		const rankingData = await rankingRes.json();
 
 		return {
 			props: {
 				ex: ex[0],
+				rankingData,
 				slug
 			}
 		};
@@ -29,7 +36,8 @@ export async function getServerSideProps({ query: { slug } }) {
 	}
 }
 
-export default function ReadingExPage({ ex, slug }) {
+export default function ReadingExPage({ ex, slug, rankingData }) {
+	console.log(rankingData);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
@@ -45,6 +53,12 @@ export default function ReadingExPage({ ex, slug }) {
 			mounted = false;
 		};
 	}, []);
+
+	// Modal
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	if (ex.premium === true && checkMembership(user)) {
 		return (
@@ -65,11 +79,10 @@ export default function ReadingExPage({ ex, slug }) {
 									height={ex.cover.formats.small.height}
 								/>
 							</div> */}
-
 							<br />
 							<Passage text={ex.passage} title={ex.title} />
-
 							<br />
+
 							{ex.mc ? (
 								<MCPanel
 									questions={ex.questions}
@@ -91,7 +104,6 @@ export default function ReadingExPage({ ex, slug }) {
 							<Link href='/readings'>
 								<Button variant='light'>Back</Button>
 							</Link>
-
 							<a
 								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
 								target='_blank'
@@ -100,6 +112,14 @@ export default function ReadingExPage({ ex, slug }) {
 									題目/答案有問題
 								</Button>
 							</a>
+							<Button variant='info' onClick={handleShow}>
+								排行榜
+							</Button>
+							<Ranking
+								show={show}
+								rankingData={rankingData}
+								handleClose={handleClose}
+							/>{' '}
 						</div>
 					</>
 				)}
@@ -115,7 +135,6 @@ export default function ReadingExPage({ ex, slug }) {
 						{' '}
 						<Container>
 							<h2 className='mt-3'>{ex.title}</h2>
-
 							{/* <div className='text-center'>
 								<Image
 									src={ex.cover.formats.small.url}
@@ -126,7 +145,6 @@ export default function ReadingExPage({ ex, slug }) {
 							</div> */}
 							<br />
 							<Passage text={ex.passage} title={ex.title} />
-
 							<br />
 							{ex.mc ? (
 								<MCPanel
@@ -149,7 +167,6 @@ export default function ReadingExPage({ ex, slug }) {
 							<Link href='/readings'>
 								<Button variant='light'>Back</Button>
 							</Link>
-
 							<a
 								href={`https://wa.me/85263520220/?text=練習${slug}裡面的答案或問題有錯誤的地方`}
 								target='_blank'
@@ -158,6 +175,14 @@ export default function ReadingExPage({ ex, slug }) {
 									題目/答案有問題
 								</Button>
 							</a>
+							<Button variant='info' onClick={handleShow}>
+								排行榜
+							</Button>
+							<Ranking
+								show={show}
+								rankingData={rankingData}
+								handleClose={handleClose}
+							/>{' '}
 						</div>
 					</>
 				)}
