@@ -54,31 +54,32 @@ export default function ScorePage({ token, rankingData }) {
 		setStartingTime,
 		record
 	} = useContext(ScoreContext);
+
 	const { user } = useContext(AuthContext);
 
 	const total = scoringData.length;
-	const [score, setSscore] = useState(0);
+	// const [score, setSscore] = useState(0);
 
 	const totalPoint = calculatingPoint(scoringData);
 
-	useEffect(() => {
-		let mounted = true;
-		let timer;
-		if (mounted) {
-			timer = setInterval(() => {
-				if (score === totalPoint) {
-					mounted = false;
-				} else {
-					setSscore(score + 1);
-				}
-			}, 300);
-		}
+	// useEffect(() => {
+	// 	let mounted = true;
+	// 	let timer;
+	// 	if (mounted) {
+	// 		timer = setInterval(() => {
+	// 			if (score === totalPoint) {
+	// 				mounted = false;
+	// 			} else {
+	// 				setSscore(score + 1);
+	// 			}
+	// 		}, 300);
+	// 	}
 
-		return () => {
-			mounted = false;
-			clearInterval(timer);
-		};
-	});
+	// 	return () => {
+	// 		mounted = false;
+	// 		clearInterval(timer);
+	// 	};
+	// });
 
 	const handleClick = () => {
 		setScoringData([]);
@@ -123,13 +124,20 @@ export default function ScorePage({ token, rankingData }) {
 		<Layout title={'你的成續 ｜A-station'}>
 			<ToastContainer />
 			{scoringData.length === 0 ? (
-				''
+				<>
+					<h1 className='mt-3'>抱歉～ 你的分數不見了</h1>
+					<Link href={'/'}>
+						<Button variant='light' onClick={handleClick}>
+							回到主頁
+						</Button>
+					</Link>
+				</>
 			) : (
 				<>
 					<div className='text-center mt-5'>
 						<h3>{title.replaceAll('-', ' ')}</h3>
 						<h4>
-							Score : {score} / {total}
+							Score : {totalPoint} / {total}
 						</h4>
 						{/* Time Spent */}
 						<h4 className='mt-3'>完成時間 </h4>
@@ -141,8 +149,10 @@ export default function ScorePage({ token, rankingData }) {
 						<br />
 						<br />
 						<ProgressBar
-							now={Math.round((score / total) * 100)}
-							label={`${Math.round((score / total) * 100)} %`}
+							now={Math.round((totalPoint / total) * 100)}
+							label={`${Math.round(
+								(totalPoint / total) * 100
+							)} %`}
 						/>
 						<br />
 						<br />
