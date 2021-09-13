@@ -37,7 +37,6 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function ReadingExPage({ ex, slug, rankingData }) {
-	console.log(rankingData);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 

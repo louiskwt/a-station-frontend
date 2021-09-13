@@ -16,7 +16,6 @@ import Ranking from '@/components/Ranking';
 
 export async function getServerSideProps({ req, query: { slug } }) {
 	const { token } = parseCookies(req);
-	// console.log(token);
 
 	if (token) {
 		try {
@@ -58,28 +57,28 @@ export default function ScorePage({ token, rankingData }) {
 	const { user } = useContext(AuthContext);
 
 	const total = scoringData.length;
-	// const [score, setSscore] = useState(0);
+	const [score, setSscore] = useState(0);
 
 	const totalPoint = calculatingPoint(scoringData);
 
-	// useEffect(() => {
-	// 	let mounted = true;
-	// 	let timer;
-	// 	if (mounted) {
-	// 		timer = setInterval(() => {
-	// 			if (score === totalPoint) {
-	// 				mounted = false;
-	// 			} else {
-	// 				setSscore(score + 1);
-	// 			}
-	// 		}, 300);
-	// 	}
+	useEffect(() => {
+		let mounted = true;
+		let timer;
+		if (mounted) {
+			timer = setInterval(() => {
+				if (score === totalPoint) {
+					mounted = false;
+				} else {
+					setSscore(score + 1);
+				}
+			}, 300);
+		}
 
-	// 	return () => {
-	// 		mounted = false;
-	// 		clearInterval(timer);
-	// 	};
-	// });
+		return () => {
+			mounted = false;
+			clearInterval(timer);
+		};
+	});
 
 	const handleClick = () => {
 		setScoringData([]);
@@ -149,10 +148,8 @@ export default function ScorePage({ token, rankingData }) {
 						<br />
 						<br />
 						<ProgressBar
-							now={Math.round((totalPoint / total) * 100)}
-							label={`${Math.round(
-								(totalPoint / total) * 100
-							)} %`}
+							now={Math.round((score / total) * 100)}
+							label={`${Math.round((score / total) * 100)} %`}
 						/>
 						<br />
 						<br />

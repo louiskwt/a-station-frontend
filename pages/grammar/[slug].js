@@ -4,7 +4,6 @@ import { API_URL } from '@/config/index';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Image from 'next/image';
 import SAPanel from '@/components/SAPanel';
 import MCPanel from '@/components/MCPanel';
 import AuthContext from '@/context/AuthContext';
@@ -36,7 +35,6 @@ export async function getServerSideProps({ query: { slug } }) {
 }
 
 export default function WritingExPage({ ex, rankingData, slug }) {
-	console.log(rankingData);
 	// Context states
 	const { startingTime, setStartingTime, setType } = useContext(ScoreContext);
 
