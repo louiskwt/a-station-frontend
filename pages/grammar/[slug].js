@@ -44,7 +44,7 @@ export default function WritingExPage({ ex, rankingData, slug }) {
 		let mounted = true;
 		if (mounted) {
 			setStartingTime(Date.now());
-			setType('writings');
+			setType('grammar');
 		}
 		return () => {
 			mounted = false;

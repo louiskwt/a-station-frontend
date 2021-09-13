@@ -124,10 +124,12 @@ export default function ScorePage({ token, rankingData }) {
 			<ToastContainer />
 			{scoringData.length === 0 ? (
 				<>
-					<h1 className='mt-3'>抱歉～ 你的分數不見了</h1>
-					<Link href={'/'}>
+					<h1 className='mt-3'>正在跳轉到練習頁面...</h1>
+					<br />
+					<h2>如無法跳轉請按返回</h2>
+					<Link href={`/`}>
 						<Button variant='light' onClick={handleClick}>
-							回到主頁
+							返回
 						</Button>
 					</Link>
 				</>
