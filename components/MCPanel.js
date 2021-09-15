@@ -111,12 +111,13 @@ export default function AnswerPanel({
 							{data.options.map((option) => (
 								<Form.Check
 									inline
-									className='mb-3 mr-3'
+									className='mb-3 mr-4'
 									name={`q${index + 1}`}
 									type='radio'
 									label={option}
 									key={option}
 									id={option}
+									style={{ minWidth: '25px !important' }}
 								/>
 							))}
 						</Form.Group>
