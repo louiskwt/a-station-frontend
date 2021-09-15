@@ -117,7 +117,10 @@ export default function AnswerPanel({
 									label={option}
 									key={option}
 									id={option}
-									style={{ minWidth: '25px !important' }}
+									style={{
+										minWidth: '25px !important',
+										display: 'block'
+									}}
 								/>
 							))}
 						</Form.Group>
